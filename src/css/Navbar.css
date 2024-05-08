@@ -1,0 +1,58 @@
+.navbar {
+  background-color: #000000;
+  color: #fff;
+  padding: 10px 0;
+}
+
+.navList {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.nav-item p {
+  padding: 8px 16px;
+}
+
+.nav-item p:hover {
+  background-color: #d2d2d2;
+  color: black;
+}
+
+.btn {
+  background-color: #fff;
+  color: black;
+  font-size: 25px;
+  border: none;
+}
+
+.navbar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.navbar-title {
+  color: #000000;
+  font-size: 30px;
+  font-family: "Bodoni Moda", serif;
+  font-weight: 500px;
+  font-style: normal;
+  letter-spacing: 4px;
+
+}
+
+.brand-mark {
+  display: inline-block;
+  width: 30px; 
+  height: 30px; 
+  border-radius: 50%;
+  background-color: #000000; 
+  color: #fff; 
+  text-align: center;
+  line-height: 30px; 
+  font-weight: 100;
+}
