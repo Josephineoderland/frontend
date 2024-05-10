@@ -55,7 +55,7 @@ const Navbar = () => {
     },
   }
 
-  const items = ["Home", "Products", "Services", "About"]
+  const items = ["Home", "Products", "Services", "Character"]
 
   return (
     <>
@@ -64,7 +64,7 @@ const Navbar = () => {
           ArtCanva
           <span
             style={{ padding: "5px", letterSpacing: "0" }}
-            class="brand-mark"
+            className="brand-mark"
           >
             S
           </span>

@@ -1,0 +1,92 @@
+.character-title {
+  color: #000000;
+  font-size: 20px;
+  font-family: "Bodoni Moda", serif;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 4px;
+  margin: 10px;
+}
+
+.text {
+  margin: 10px;
+}
+
+.text,
+p {
+  font-size: 15px;
+  font-family: "Bodoni Moda", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.arrow-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.arrow-more,
+p {
+  margin-bottom: 5px;
+}
+
+.arrow,
+img {}
+
+.page-img img {
+  width: 70%;
+
+}
+
+.page-img {
+  margin: 30px 0;
+}
+
+.one-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.two-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.three-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fore-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.character-btn {
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+  font-family: "Bodoni Moda", serif;
+}
+
+.generate-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #000000;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.generate-btn:hover {
+  background-color: #202020;
+}
