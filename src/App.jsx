@@ -5,6 +5,7 @@ import Home from "./home/Home.jsx"
 import Navbar from "./home/Navbar"
 import Character from "./character/Character.jsx"
 import CharacterGenerator from "./character/CharacterGenerator"
+import ArtGalleryPage from "./gallery/ArtGalleryPage"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/character" element={<Character />} />
         <Route path="/CharacterGenerator" element={<CharacterGenerator />} />
+        <Route path="/art-gallery" element={<ArtGalleryPage />} />
       </Routes>
     </Router>
   )

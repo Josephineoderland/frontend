@@ -15,7 +15,7 @@ const Character = () => {
 
   return (
     <div className="character-page">
-      <div className="character-title">Random Character Generator</div>
+      <div className="under-title">Random Character Generator</div>
       <div className="text">
         <p>
           Struggling with a creative dry spell? Introducing our random character

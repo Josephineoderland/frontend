@@ -53,7 +53,9 @@ const CharacterGenerator = () => {
       </div>
       {Object.keys(characterDetails).map((category) => (
         <div key={category} className={`category-box category-${category}`}>
-          <h3 onClick={() => toggleCategoryVisibility(category)}>{category}</h3>
+          <h3 onClick={() => toggleCategoryVisibility(category)}>
+            {category}:
+          </h3>
           {categoryVisibility[category] && (
             <ul>
               {Object.keys(selectedProperties[category] || {}).map(

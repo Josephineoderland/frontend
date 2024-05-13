@@ -55,7 +55,7 @@ const Navbar = () => {
     },
   }
 
-  const items = ["Home", "Products", "Services", "Character"]
+  const items = ["Home", "Products", "Art-gallery", "Character"]
 
   return (
     <>
@@ -91,12 +91,21 @@ const Navbar = () => {
             >
               {items.map((item) => (
                 <motion.li className="nav-item" variants={navItem} key={item}>
-                  <Link
-                    to={`/${item.toLowerCase()}`}
-                    style={{ textDecoration: "none", color: "#fff" }}
-                  >
-                    {item}
-                  </Link>
+                  {item === "Art-gallery" ? (
+                    <Link
+                      to={`/${item.toLowerCase().replace(" ", "-")}`}
+                      style={{ textDecoration: "none", color: "#fff" }}
+                    >
+                      {item}
+                    </Link>
+                  ) : (
+                    <Link
+                      to={`/${item.toLowerCase()}`}
+                      style={{ textDecoration: "none", color: "#fff" }}
+                    >
+                      {item}
+                    </Link>
+                  )}
                 </motion.li>
               ))}
             </motion.ul>

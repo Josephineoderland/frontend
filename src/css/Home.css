@@ -4,6 +4,14 @@
   background-color: #000000;
 }
 
+h1 {
+  font-size: 25px;
+  font-family: "Bodoni Moda", serif;
+  font-weight: 500px;
+  font-style: normal;
+  letter-spacing: 2px;
+}
+
 .scrolling-text-container {
   position: relative;
   overflow: hidden;
@@ -31,4 +39,24 @@
   100% {
     transform: translateX(-100%);
   }
+}
+
+.art-map {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.overlay-text {
+  position: absolute;
+  text-decoration: underline;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  z-index: 1;
 }
