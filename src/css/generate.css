@@ -1,0 +1,61 @@
+.Random {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.Random h2 {
+  cursor: pointer;
+  margin-bottom: 5px;
+  font-size: 20px;
+  font-family: "Bodoni Moda", serif;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 4px;
+}
+
+.Random p {
+  padding-left: 20px;
+  margin-bottom: 5px;
+}
+
+
+.Random button {
+  margin-top: 20px;
+
+}
+
+.generate-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #000000;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: "Bodoni Moda", serif;
+}
+
+
+.generate-btn:hover {
+  background-color: #202020;
+}
+
+.character-btn {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-family: "Bodoni Moda", serif;
+  margin-top: 20px;
+}
+
+.character-page {
+  margin: 40px;
+}

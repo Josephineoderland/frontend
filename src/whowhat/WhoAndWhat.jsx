@@ -1,8 +1,7 @@
-import React from "react"
 import "../css/Draw.css"
 import IconSVG from "../assets/Chevron.svg"
-import ImgOne from "../assets/pexels-craytive-1478477.jpg"
-import ImgTwo from "../assets/CHAR.jpg"
+import ImgOne from "../assets/Who.jpg"
+import ImgTwo from "../assets/pexels-messalaciulla-2831797.jpg"
 import { Link } from "react-router-dom"
 
 const Character = () => {
@@ -16,26 +15,26 @@ const Character = () => {
   return (
     <div className="character-page">
       <div className="under-title">
-        <h3>Random Character Generator</h3>{" "}
+        <h3>Random Character And Action Generator</h3>{" "}
       </div>
       <div className="text">
         <p>
-          Struggling with a creative dry spell? Introducing our random character
-          generator, your go-to solution when inspiration runs dry! Our
-          generator constructs unique characters with intricate details spanning
-          from nose shape to hairstyle. Whether you're crafting a new
-          protagonist for your story or simply seeking a muse for your artwork,
-          our generator offers the creative spark you need. Prepare to be
-          captivated by the diverse combinations of features, from facial
-          expressions to clothing styles, that our algorithm can conjure.
-          Jumpstart your creativity with our random character generator and
-          explore a realm brimming with infinite possibilities!
+          Feeling uninspired and in need of a creative boost? Introducing our
+          random character and action generator, your go-to solution when
+          imagination runs dry! Our innovative tool brings forth a myriad of
+          unique characters engaged in captivating actions, from epic quests to
+          everyday adventures. Whether you're crafting a new protagonist for
+          your story or seeking inspiration for your visual storytelling, our
+          generator offers the creative spark you need. Prepare to be enthralled
+          by the diverse cast of characters, each embarking on their own
+          journey, from daring escapades to heartfelt encounters. Ignite your
+          creativity with our random character and action generator, and explore
+          a realm filled with infinite storytelling possibilities!
         </p>
       </div>
-
       <div className="character-btn">
-        <Link to="/CharacterGenerator" className="generate-btn">
-          Generate Character
+        <Link to="/WhoAndWhatG" className="generate-btn">
+          Generate Character And Action
         </Link>
       </div>
 

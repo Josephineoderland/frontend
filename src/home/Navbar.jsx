@@ -1,114 +1,179 @@
 import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "../css/Navbar.css"
+import userIcon from "../assets/icons8-male-user-24.png"
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, updateIsLoggedIn }) => {
   const [isToggled, setToggle] = useState(false)
+  const [isUserMenuOpen, setUserMenuOpen] = useState(false)
+  const [subItemsVisible, setSubItemsVisible] = useState(false)
 
-  const navContainer = {
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-      },
-    },
-    hidden: {
-      opacity: 0,
-      transition: {
-        duration: 0.3,
-      },
-    },
+  const navigate = useNavigate()
+
+  const toggleMenu = () => {
+    setToggle(!isToggled)
+    setUserMenuOpen(false)
   }
 
-  const navList = {
-    visible: {
-      opacity: 1,
-      transition: {
-        delayChildren: 0.2,
-        staggerChildren: 0.07,
-      },
-    },
-    hidden: {
-      opacity: 0,
-      transition: {
-        staggerChildren: 0.05,
-        staggerDirection: -1,
-      },
-    },
+  const toggleUserMenu = () => {
+    setUserMenuOpen(!isUserMenuOpen)
+    setToggle(false)
   }
 
-  const navItem = {
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        y: { stiffness: 1000, velocity: -100 },
-      },
-    },
-    hidden: {
-      y: 50,
-      opacity: 0,
-      transition: {
-        y: { stiffness: 1000, velocity: -100 },
-      },
-    },
+  const toggleSubItems = () => {
+    setSubItemsVisible(!subItemsVisible)
   }
 
-  const items = ["Home", "Products", "Art-gallery", "Character"]
+  const handleLogout = () => {
+    localStorage.removeItem("token")
+    updateIsLoggedIn(false)
+    navigate("/home")
+  }
+
+  const items = ["Home", "Chat", "Art-gallery", "Draw"]
 
   return (
     <>
       <div className="navbar-header">
-        <h1 className="navbar-title">
-          ArtCanva
-          <span
-            style={{ padding: "5px", letterSpacing: "0" }}
-            className="brand-mark"
-          >
-            S
-          </span>
-        </h1>
-        <button className="btn" onClick={() => setToggle(!isToggled)}>
-          =
-        </button>
+        <div className="navbar-title">
+          <h1>
+            ArtCanva
+            <span
+              style={{ padding: "5px", letterSpacing: "0" }}
+              className="brand-mark"
+            >
+              S
+            </span>
+          </h1>
+        </div>
+        <div className="navbar-button">
+          <button className="btn" onClick={toggleMenu}>
+            =
+          </button>
+          <button className="user-icon-btn" onClick={toggleUserMenu}>
+            <img src={userIcon} alt="User Icon" className="user-icon" />
+          </button>
+        </div>
       </div>
+      <AnimatePresence>
+        {isUserMenuOpen && (
+          <motion.div
+            className="user-menu"
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+          >
+            {isLoggedIn ? (
+              <>
+                <h4>
+                  <Link to="/" className="btn" onClick={handleLogout}>
+                    Logout
+                  </Link>
+                </h4>
+                <h4>
+                  <Link to="/MyPage" className="btn">
+                    My Page
+                  </Link>
+                </h4>
+              </>
+            ) : (
+              <>
+                <h4>
+                  <Link to="/login" className="btn">
+                    Login
+                  </Link>
+                </h4>
+                <h4>
+                  <Link to="/register" className="btn">
+                    Sign Up
+                  </Link>
+                </h4>
+              </>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
       <AnimatePresence>
         {isToggled && (
           <motion.div
             className="navbar"
             initial="hidden"
-            animate={isToggled ? "visible" : "hidden"}
+            animate="visible"
             exit="hidden"
-            variants={navContainer}
           >
             <motion.ul
               className="navList"
               initial="hidden"
               animate="visible"
               exit="hidden"
-              variants={navList}
             >
               {items.map((item) => (
-                <motion.li className="nav-item" variants={navItem} key={item}>
-                  {item === "Art-gallery" ? (
-                    <Link
-                      to={`/${item.toLowerCase().replace(" ", "-")}`}
-                      style={{ textDecoration: "none", color: "#fff" }}
-                    >
-                      {item}
-                    </Link>
+                <motion.li className="nav-item" key={item}>
+                  {item === "Draw" ? (
+                    <div>
+                      <h4 onClick={toggleSubItems}>{item}</h4>
+                    </div>
                   ) : (
                     <Link
-                      to={`/${item.toLowerCase()}`}
-                      style={{ textDecoration: "none", color: "#fff" }}
+                      to={
+                        item === "Art-gallery"
+                          ? `/${item.toLowerCase().replace(" ", "-")}`
+                          : `/${item.toLowerCase()}`
+                      }
+                      style={{
+                        textDecoration: "none",
+                        color: "#fff",
+                        display: "block",
+                      }}
                     >
-                      {item}
+                      <h4>{item}</h4>
                     </Link>
                   )}
                 </motion.li>
               ))}
             </motion.ul>
+            {subItemsVisible && (
+              <motion.div
+                className="sub-menu-row"
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+              >
+                <motion.ul>
+                  <motion.li>
+                    <h5>
+                      <Link
+                        to="/character"
+                        style={{ textDecoration: "none", color: "#fff" }}
+                      >
+                        Characters
+                      </Link>
+                    </h5>
+                  </motion.li>
+                  <motion.li>
+                    <h5>
+                      <Link
+                        to="/place"
+                        style={{ textDecoration: "none", color: "#fff" }}
+                      >
+                        Place and feel
+                      </Link>
+                    </h5>
+                  </motion.li>
+                  <motion.li>
+                    <h5>
+                      <Link
+                        to="/who-and-what"
+                        style={{ textDecoration: "none", color: "#fff" }}
+                      >
+                        Who and What?
+                      </Link>
+                    </h5>
+                  </motion.li>
+                </motion.ul>
+              </motion.div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

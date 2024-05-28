@@ -5,7 +5,6 @@ import "../css/artGallery.css"
 import Glass from "../assets/magnifying.png"
 import IconSVG from "../assets/Chevron.svg"
 
-
 const ArtGalleryPage = () => {
   const [searchQuery, setSearchQuery] = useState("")
   const [artGalleries, setArtGalleries] = useState([])
@@ -15,27 +14,34 @@ const ArtGalleryPage = () => {
   const handleSearch = async () => {
     setLoading(true)
     try {
-      const response = await axios.get(
-        `https://my-art-server.onrender.com/maps/art-galleries?query=${searchQuery}`
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const response = await axios.get(
+            `https://my-art-server.onrender.com/maps/art-galleries?query=art+galleries&types=art_gallery&radius=50000&latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`
+          )
+          const filteredResults = response.data.filter((gallery) => {
+            const nameMatches = gallery.name
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())
+            const addressMatches = gallery.formatted_address
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())
+            return nameMatches || addressMatches
+          })
+          const limitedResults = filteredResults.slice(0, 5)
+          setArtGalleries(limitedResults)
+          if (arrowRef.current && limitedResults.length > 0) {
+            arrowRef.current.style.display = "flex"
+          }
+          setLoading(false)
+        },
+        () => {
+          setLoading(false)
+        }
       )
-      const filteredResults = response.data.filter((gallery) => {
-        const nameMatches = gallery.name
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase())
-        const addressMatches = gallery.formatted_address
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase())
-        return nameMatches || addressMatches
-      })
-      const limitedResults = filteredResults.slice(0, 5)
-      setArtGalleries(limitedResults)
-      if (arrowRef.current && limitedResults.length > 0) {
-        arrowRef.current.style.display = "flex"
-      }
     } catch (error) {
       console.error("Error searching for art galleries:", error)
     }
-    setLoading(false)
   }
 
   const handleKeyPress = (e) => {
@@ -55,7 +61,7 @@ const ArtGalleryPage = () => {
     <div>
       <div className="title-art">
         <div className="under-title">
-          <h1>Search for a location!</h1>
+          <h3>Search for a location!</h3>
           <div className="title-info">
             <p>
               Discover the vibrant world of art around your location. Search for
@@ -88,7 +94,7 @@ const ArtGalleryPage = () => {
         </div>
       </form>
       {loading ? (
-        <p>Loading...</p>
+        <h4>Loading...</h4>
       ) : (
         <div>
           {artGalleries.length > 0 && (
@@ -101,7 +107,7 @@ const ArtGalleryPage = () => {
             ? artGalleries.map((gallery, index) => (
                 <div key={index} className="gallery-item">
                   <div className="gallery-info">
-                    <h2>{gallery.name}</h2>
+                    <h3>{gallery.name}</h3>
                     <div className="art-description">
                       <p>Location: {gallery.formatted_address}</p>
                       <p>

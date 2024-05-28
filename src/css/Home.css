@@ -1,16 +1,8 @@
 .page {
   margin-top: 10px;
-  padding: 0 0 3px;
   background-color: #000000;
 }
 
-h1 {
-  font-size: 25px;
-  font-family: "Bodoni Moda", serif;
-  font-weight: 500px;
-  font-style: normal;
-  letter-spacing: 2px;
-}
 
 .scrolling-text-container {
   position: relative;
@@ -22,13 +14,8 @@ h1 {
   bottom: 0;
   left: 0;
   white-space: nowrap;
-  font-family: "Bodoni Moda", serif;
-  font-weight: 200px;
-  font-style: normal;
-  font-size: 30px;
-  letter-spacing: 4px;
-  color: #000000;
   animation: scroll 10s linear infinite;
+  margin: 0%;
 }
 
 @keyframes scroll {
@@ -46,7 +33,12 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px;
+  margin: 20px 0;
+}
+
+.art-map-container {
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
 }
 
 .overlay-text {

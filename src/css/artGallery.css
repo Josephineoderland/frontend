@@ -5,11 +5,12 @@
 
 .title-art {
   background-color: black;
-  padding: 30px 0 15px;
-  margin: 10px 10px;
+  padding: 20px;
+  height: 350px;
+  margin-top: 10px;
 }
 
-.title-art h1 {
+.title-art h3 {
   color: white;
   margin: 15px 15px 30px;
 }
@@ -18,10 +19,6 @@
   padding: 20px;
   margin: 0 15px;
   background-color: #fff;
-}
-
-.title-info p {
-  letter-spacing: 1px;
 }
 
 img {
@@ -36,11 +33,8 @@ img {
 
 .searchTerm {
   width: 100%;
-  border: 2px solid #000000;
   border-right: none;
   padding: 5px;
-
-  border-radius: 5px 0 0 5px;
   outline: none;
   color: #878787;
 }
@@ -58,43 +52,21 @@ img {
 .searchButton {
   width: 40px;
   height: 36px;
-  border: 2px solid #000000;
-  background: #ffffff;
+  border: none;
+  background: none;
   text-align: center;
   color: #fff;
-  border-radius: 0 5px 5px 0;
   cursor: pointer;
   font-size: 20px;
-}
-
-.arrow-more {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 0px;
-}
-
-.arrow-more,
-p {
-  margin-bottom: 20px;
 }
 
 .gallery-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-
   padding-bottom: 30px;
   background-color: #000000;
   margin: 10px 10px;
-}
-
-.gallery-info h2 {
-  color: #fff;
-  font-family: "Bodoni Moda", serif;
-  font-weight: 500;
-  font-style: normal;
-  letter-spacing: 2px;
 }
 
 .gallery-info {
@@ -107,6 +79,6 @@ p {
 }
 
 .art-description p {
-  margin: 0;
+
   color: #fff;
 }

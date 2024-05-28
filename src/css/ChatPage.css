@@ -1,0 +1,186 @@
+.title {
+  text-align: center;
+}
+
+.message-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.chat-container {
+  padding: 20px;
+}
+
+.message-list {
+  margin-bottom: 20px;
+}
+
+.message .user-name {
+  font-weight: bold;
+  margin-right: 0.5rem;
+
+}
+
+.message .message-text {
+  display: inline;
+
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid #000000;
+  margin-bottom: 1rem;
+  background-color: #ffffff;
+   box-shadow: 7px 7px;
+}
+
+.message img {
+  max-width: 100%;
+  height: auto;
+}
+
+form:hover {
+  background-color: #f1f1f1;
+}
+
+form {
+  border: 1px solid #000000;
+  padding: 10px;
+  margin: 40px;
+  box-shadow: 7px 7px;
+}
+
+.text-label {
+  color: #000000;
+  margin: 10px 0 0;
+}
+
+#newMessageInput {
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 90%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: "Fira Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#newMessageInput:focus {
+  outline: none;
+  border-color: rgb(111, 111, 111);
+}
+
+.char-count {
+  color: #9d9c9c;
+}
+
+.char-count.exceeded {
+  color: red;
+}
+
+.submit {
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: #000000;
+  font-size: 15px;
+  font-family: "Bodoni Moda", serif;
+  font-weight: 500;
+}
+
+.file-upload-container {
+  margin-bottom: 20px;
+}
+
+.file-upload-label {
+
+  margin-right: 10px;
+}
+
+.file-upload-input {
+  display: none;
+}
+
+.file-upload-label .file-name {
+  text-decoration: underline;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+
+
+.uploading-message {
+  font-style: italic;
+  color: #555;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .title {
+    font-size: 50px;
+  }
+
+  .text-label {
+    font-size: 20px;
+  }
+
+  .submit-button {
+    font-size: 15px;
+  }
+
+  .char-count {
+    font-size: 15px;
+  }
+
+  form {
+    width: 60%;
+    margin: 40px auto;
+  }
+
+  #newMessageInput {
+    margin-left: 8px;
+  }
+
+  .submit-button {
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+}
+
+@media (min-width: 1025px) {
+  form {
+    width: 50%;
+    margin: 40px auto;
+  }
+
+  #newMessageInput {
+    margin-left: 25px;
+  }
+
+  .submit-button {
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+
+  .title {
+    font-size: 60px;
+  }
+
+  .text-label {
+    font-size: 30px;
+  }
+
+  .submit-button {
+    font-size: 20px;
+  }
+
+  .char-count {
+    font-size: 20px;
+  }
+}

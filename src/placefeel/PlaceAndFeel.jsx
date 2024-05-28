@@ -1,8 +1,7 @@
-import React from "react"
 import "../css/Draw.css"
 import IconSVG from "../assets/Chevron.svg"
-import ImgOne from "../assets/pexels-craytive-1478477.jpg"
-import ImgTwo from "../assets/CHAR.jpg"
+import ImgOne from "../assets/drawN.jpg"
+import ImgTwo from "../assets/drawNA.jpg"
 import { Link } from "react-router-dom"
 
 const Character = () => {
@@ -16,26 +15,26 @@ const Character = () => {
   return (
     <div className="character-page">
       <div className="under-title">
-        <h3>Random Character Generator</h3>{" "}
+        <h3>Random Place And Mood Generator</h3>{" "}
       </div>
       <div className="text">
         <p>
-          Struggling with a creative dry spell? Introducing our random character
-          generator, your go-to solution when inspiration runs dry! Our
-          generator constructs unique characters with intricate details spanning
-          from nose shape to hairstyle. Whether you're crafting a new
-          protagonist for your story or simply seeking a muse for your artwork,
-          our generator offers the creative spark you need. Prepare to be
-          captivated by the diverse combinations of features, from facial
-          expressions to clothing styles, that our algorithm can conjure.
-          Jumpstart your creativity with our random character generator and
-          explore a realm brimming with infinite possibilities!
+          Feeling stuck in a rut? Enter our random place and mood generator,
+          your ultimate remedy for creative block! Our innovative tool crafts
+          vivid settings and evocative atmospheres, transporting you to realms
+          both fantastical and familiar. Whether you're shaping the backdrop for
+          your next narrative masterpiece or seeking inspiration for your visual
+          artistry, our generator provides the spark you crave. Prepare to
+          immerse yourself in a tapestry of landscapes, from bustling cityscapes
+          to serene natural wonders, each infused with a spectrum of emotions,
+          from joy to melancholy. Embark on a journey of imagination with our
+          random place and mood generator, and unlock a universe brimming with
+          boundless possibilities!
         </p>
       </div>
-
       <div className="character-btn">
-        <Link to="/CharacterGenerator" className="generate-btn">
-          Generate Character
+        <Link to="/PlaceAndFeelG" className="generate-btn">
+          Generate Place And Mood
         </Link>
       </div>
 

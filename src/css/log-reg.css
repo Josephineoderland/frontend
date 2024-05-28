@@ -1,0 +1,76 @@
+.recevie h3 {
+  color: black;
+}
+
+.fill-title h3 {
+  color: black;
+}
+
+.fill-in {
+  background-color: white;
+  box-shadow: 10px 10px 8px 10px #888888;
+  padding: 30px;
+  margin: 20px;
+  width: 400px;
+
+  box-sizing: border-box;
+}
+
+.fill-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.input-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+  border: none;
+  border-bottom: 2px solid black;
+  width: 100%;
+  padding: 5px 0;
+  outline: none;
+  background: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="text"]:active,
+input[type="password"]:active {
+  background: none;
+  outline: none;
+
+}
+
+.fill-button {
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #000000;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: "Bodoni Moda", serif;
+}
+
+.fill-button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}

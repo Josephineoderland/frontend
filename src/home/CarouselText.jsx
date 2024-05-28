@@ -23,7 +23,7 @@ const CarouselText = ({ text, isActive }) => {
   const textKey = `carousel-text-${text}`
 
   return (
-    <motion.div
+    <motion.h3
       key={textKey}
       className="carousel-text"
       initial="hidden"
@@ -33,7 +33,7 @@ const CarouselText = ({ text, isActive }) => {
       style={{ zIndex: 4, marginTop: "60px" }}
     >
       {text}
-    </motion.div>
+    </motion.h3>
   )
 }
 

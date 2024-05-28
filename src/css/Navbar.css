@@ -1,7 +1,9 @@
 .navbar {
   background-color: #000000;
   color: #fff;
-  padding: 10px 0;
+  padding: 10px 0px;
+  display: flex;
+  flex-direction: column;
 }
 
 .navList {
@@ -35,24 +37,57 @@
   padding: 0 20px;
 }
 
-.navbar-title {
-  color: #000000;
-  font-size: 30px;
-  font-family: "Bodoni Moda", serif;
-  font-weight: 500px;
-  font-style: normal;
-  letter-spacing: 4px;
-
-}
-
 .brand-mark {
   display: inline-block;
-  width: 30px; 
-  height: 30px; 
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background-color: #000000; 
-  color: #fff; 
+  background-color: #000000;
+  color: #fff;
   text-align: center;
-  line-height: 30px; 
+  line-height: 30px;
   font-weight: 100;
+}
+
+.sub-menu-row {
+  display: flex;
+  justify-content: space-around;
+  border-top: 2px solid#fff;
+}
+
+.sub-menu-row ul {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+}
+
+.sub-menu-row li {
+  list-style: none;
+  padding: 10px 16px 0;
+  font-size: 14px;
+}
+
+.user-menu {
+  background-color: #000000;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.user-menu .btn {
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 16px;
+  margin: 16px;
+
+  border: none;
+  text-decoration: none;
+}
+
+.user-icon-btn {
+  background-color: transparent;
+  border: none;
 }
