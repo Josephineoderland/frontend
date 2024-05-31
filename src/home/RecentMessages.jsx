@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import "../css/RecentMessages.css"
+import { jsonApiRequest } from "../utils/api"
 
 const RecentMessages = () => {
   const [recentMessages, setRecentMessages] = useState([])
@@ -11,9 +12,7 @@ const RecentMessages = () => {
     const fetchRecentMessages = async () => {
       setIsLoading(true)
       try {
-        const response = await fetch(
-          "https://my-art-server.onrender.com/messages"
-        )
+        const response = await jsonApiRequest("GET", "/messages")
         const data = await response.json()
         const sortedMessages = data.sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)

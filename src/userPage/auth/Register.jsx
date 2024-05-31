@@ -1,39 +1,47 @@
-import React, { useState, useEffect } from "react"
-import axios from "axios"
+import React, { useState, useEffect, useCallback } from "react"
 import { useNavigate } from "react-router-dom"
 import { getUserIdFromToken } from "../auth/authUtils"
 import userIcon from "../../assets/user_1251070.png"
 import passwordIcon from "../../assets/lock_12484073.png"
 import "../../css/log-reg.css"
-import fillImg from "../../assets/Namnlöst-8.png"
+import fillImg from "../../assets/Namnlöst-8.png"
+import { apiRequest } from "../../utils/api" // Importera din API-funktion
 
 const Register = ({ onRegister }) => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [profileImage, setProfileImage] = useState(null)
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [registered, setRegistered] = useState(false)
   const [isFormComplete, setIsFormComplete] = useState(false)
   const navigate = useNavigate()
 
-  const handleRegister = async () => {
+  const handleRegister = useCallback(async () => {
     setIsLoading(true)
+    const formData = new FormData()
+    formData.append("username", username)
+    formData.append("password", password)
+    if (profileImage) {
+      formData.append("profileImage", profileImage)
+    }
+
     try {
-      const response = await axios.post(
-        "https://my-art-server.onrender.com/auth/register",
-        { username, password },
+      const response = await apiRequest(
+        "POST",
+        "auth/register",
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+          // Multer hanterar Content-Type för multipart/form-data automatiskt.
+        },
+        formData
       )
 
       if (response.status !== 201) {
-        throw new Error(response.data.message || "Registreringen misslyckades.")
+        const responseData = await response.json()
+        throw new Error(responseData.message || "Registration failed.")
       }
 
-      const data = response.data
+      const data = await response.json()
       const token = data.token
       localStorage.setItem("token", token)
       const loggedInUserId = getUserIdFromToken(token)
@@ -41,11 +49,11 @@ const Register = ({ onRegister }) => {
       setRegistered(true)
       onRegister(loggedInUserId)
     } catch (error) {
-      setError(error.message)
+      setError(error.message || "Registration failed.")
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [username, password, profileImage, onRegister])
 
   useEffect(() => {
     if (registered) {
@@ -60,6 +68,10 @@ const Register = ({ onRegister }) => {
   useEffect(() => {
     setIsFormComplete(username !== "" && password !== "")
   }, [username, password])
+
+  const handleFileChange = (e) => {
+    setProfileImage(e.target.files[0])
+  }
 
   return (
     <div className="fill-container">
@@ -95,6 +107,14 @@ const Register = ({ onRegister }) => {
             disabled={isLoading}
           />
         </div>
+        <div className="input-container">
+          <input
+            type="file"
+            onChange={handleFileChange}
+            accept="image/*"
+            disabled={isLoading}
+          />
+        </div>
         <div className="fill-img">
           <img src={fillImg} alt="User Icon" className="input-img" />
         </div>
@@ -104,7 +124,7 @@ const Register = ({ onRegister }) => {
           disabled={isLoading || !isFormComplete}
         >
           {isLoading
-            ? "Loading ..."
+            ? "Loading..."
             : registered
             ? "You are now registered and logged in!"
             : "Register"}

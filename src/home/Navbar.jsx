@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Link, useNavigate } from "react-router-dom"
 import "../css/Navbar.css"
-import userIcon from "../assets/icons8-male-user-24.png"
 
 const Navbar = ({ isLoggedIn, updateIsLoggedIn }) => {
   const [isToggled, setToggle] = useState(false)
@@ -35,148 +34,150 @@ const Navbar = ({ isLoggedIn, updateIsLoggedIn }) => {
 
   return (
     <>
-      <div className="navbar-header">
-        <div className="navbar-title">
-          <h1>
-            ArtCanva
-            <span
-              style={{ padding: "5px", letterSpacing: "0" }}
-              className="brand-mark"
-            >
-              S
-            </span>
-          </h1>
+      <div className="navbar-container">
+        <div className="navbar-header">
+          <div className="navbar-title">
+            <h1>
+              ArtCanva
+              <span
+                style={{ padding: "5px", letterSpacing: "0" }}
+                className="brand-mark"
+              >
+                S
+              </span>
+            </h1>
+          </div>
+          <div className="navbar-button">
+            <button className="btn" onClick={toggleMenu}>
+              <i className="fas fa-bars"></i>
+            </button>
+            <button className="user-icon-btn" onClick={toggleUserMenu}>
+              <i className="far fa-user"></i>
+            </button>
+          </div>
         </div>
-        <div className="navbar-button">
-          <button className="btn" onClick={toggleMenu}>
-            =
-          </button>
-          <button className="user-icon-btn" onClick={toggleUserMenu}>
-            <img src={userIcon} alt="User Icon" className="user-icon" />
-          </button>
-        </div>
-      </div>
-      <AnimatePresence>
-        {isUserMenuOpen && (
-          <motion.div
-            className="user-menu"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-          >
-            {isLoggedIn ? (
-              <>
-                <h4>
-                  <Link to="/" className="btn" onClick={handleLogout}>
-                    Logout
-                  </Link>
-                </h4>
-                <h4>
-                  <Link to="/MyPage" className="btn">
-                    My Page
-                  </Link>
-                </h4>
-              </>
-            ) : (
-              <>
-                <h4>
-                  <Link to="/login" className="btn">
-                    Login
-                  </Link>
-                </h4>
-                <h4>
-                  <Link to="/register" className="btn">
-                    Sign Up
-                  </Link>
-                </h4>
-              </>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
-        {isToggled && (
-          <motion.div
-            className="navbar"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-          >
-            <motion.ul
-              className="navList"
+        <AnimatePresence>
+          {isUserMenuOpen && (
+            <motion.div
+              className="user-menu"
               initial="hidden"
               animate="visible"
               exit="hidden"
             >
-              {items.map((item) => (
-                <motion.li className="nav-item" key={item}>
-                  {item === "Draw" ? (
-                    <div>
-                      <h4 onClick={toggleSubItems}>{item}</h4>
-                    </div>
-                  ) : (
-                    <Link
-                      to={
-                        item === "Art-gallery"
-                          ? `/${item.toLowerCase().replace(" ", "-")}`
-                          : `/${item.toLowerCase()}`
-                      }
-                      style={{
-                        textDecoration: "none",
-                        color: "#fff",
-                        display: "block",
-                      }}
-                    >
-                      <h4>{item}</h4>
+              {isLoggedIn ? (
+                <>
+                  <h4>
+                    <Link to="/" className="link" onClick={handleLogout}>
+                      Logout
                     </Link>
-                  )}
-                </motion.li>
-              ))}
-            </motion.ul>
-            {subItemsVisible && (
-              <motion.div
-                className="sub-menu-row"
+                  </h4>
+                  <h4>
+                    <Link to="/my-page" className="link">
+                      My Page
+                    </Link>
+                  </h4>
+                </>
+              ) : (
+                <>
+                  <h4>
+                    <Link to="/login" className="link">
+                      Login
+                    </Link>
+                  </h4>
+                  <h4>
+                    <Link to="/register" className="link">
+                      Sign Up
+                    </Link>
+                  </h4>
+                </>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
+          {isToggled && (
+            <motion.div
+              className="navbar"
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              <motion.ul
+                className="navList"
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
               >
-                <motion.ul>
-                  <motion.li>
-                    <h5>
+                {items.map((item) => (
+                  <motion.li className="nav-item" key={item}>
+                    {item === "Draw" ? (
+                      <div>
+                        <h4 onClick={toggleSubItems}>{item}</h4>
+                      </div>
+                    ) : (
                       <Link
-                        to="/character"
-                        style={{ textDecoration: "none", color: "#fff" }}
+                        to={
+                          item === "Art-gallery"
+                            ? `/${item.toLowerCase().replace(" ", "-")}`
+                            : `/${item.toLowerCase()}`
+                        }
+                        style={{
+                          textDecoration: "none",
+                          color: "#fff",
+                          display: "block",
+                        }}
                       >
-                        Characters
+                        <h4>{item}</h4>
                       </Link>
-                    </h5>
+                    )}
                   </motion.li>
-                  <motion.li>
-                    <h5>
-                      <Link
-                        to="/place"
-                        style={{ textDecoration: "none", color: "#fff" }}
-                      >
-                        Place and feel
-                      </Link>
-                    </h5>
-                  </motion.li>
-                  <motion.li>
-                    <h5>
-                      <Link
-                        to="/who-and-what"
-                        style={{ textDecoration: "none", color: "#fff" }}
-                      >
-                        Who and What?
-                      </Link>
-                    </h5>
-                  </motion.li>
-                </motion.ul>
-              </motion.div>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+                ))}
+              </motion.ul>
+              {subItemsVisible && (
+                <motion.div
+                  className="sub-menu-row"
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                >
+                  <motion.ul>
+                    <motion.li>
+                      <h5>
+                        <Link
+                          to="/character"
+                          style={{ textDecoration: "none", color: "#fff" }}
+                        >
+                          Characters
+                        </Link>
+                      </h5>
+                    </motion.li>
+                    <motion.li>
+                      <h5>
+                        <Link
+                          to="/place"
+                          style={{ textDecoration: "none", color: "#fff" }}
+                        >
+                          Place and feel
+                        </Link>
+                      </h5>
+                    </motion.li>
+                    <motion.li>
+                      <h5>
+                        <Link
+                          to="/who-and-what"
+                          style={{ textDecoration: "none", color: "#fff" }}
+                        >
+                          Who and What?
+                        </Link>
+                      </h5>
+                    </motion.li>
+                  </motion.ul>
+                </motion.div>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </>
   )
 }

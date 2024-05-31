@@ -7,14 +7,17 @@ axios.defaults.baseURL = "https://my-art-server.onrender.com"
 const FriendRequestForm = ({ userId, onRequestSent }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
 
   const sendFriendRequest = async () => {
     if (!isLoggedIn()) {
-      alert("You must be logged in to send a friend request.")
+      setError("You must be logged in to send a friend request.")
       return
     }
 
     setLoading(true)
+    setError("")
+    setSuccess("")
     try {
       const token = localStorage.getItem("token")
       const loggedInUserId = getUserIdFromToken(token)
@@ -27,10 +30,15 @@ const FriendRequestForm = ({ userId, onRequestSent }) => {
           },
         }
       )
-      alert("Friend request sent!")
+      setSuccess("Friend request sent!")
       onRequestSent()
     } catch (error) {
-      setError(error.response?.data?.message || "Error sending friend request.")
+      const errorMessage = error.response?.data?.message
+      if (errorMessage === "You are already friends.") {
+        setError("You are already friends.")
+      } else {
+        setError(errorMessage || "Error sending friend request.")
+      }
     } finally {
       setLoading(false)
     }
@@ -38,10 +46,15 @@ const FriendRequestForm = ({ userId, onRequestSent }) => {
 
   return (
     <div>
-      <button onClick={sendFriendRequest} disabled={loading}>
+      <button
+        className="user-button"
+        onClick={sendFriendRequest}
+        disabled={loading}
+      >
         {loading ? "Sending..." : "Send Friend Request"}
       </button>
       {error && <p>{error}</p>}
+      {success && <p>{success}</p>}
     </div>
   )
 }

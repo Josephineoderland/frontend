@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react"
-import axios from "axios"
 import { getUserIdFromToken } from "../auth/authUtils"
 import { useNavigate } from "react-router-dom"
-
-axios.defaults.baseURL = "https://my-art-server.onrender.com"
+import { apiRequest } from "../../utils/api"
+import "../../css/friendRequests.css"
 
 const FriendRequests = () => {
   const [receivedRequests, setReceivedRequests] = useState([])
@@ -23,27 +22,23 @@ const FriendRequests = () => {
 
         const loggedInUserId = getUserIdFromToken(token)
 
-        // Fetch received friend requests
-        const receivedResponse = await axios.get(
+        const receivedResponse = await apiRequest(
+          "GET",
           `/friends/received/${loggedInUserId}`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            Authorization: `Bearer ${token}`,
           }
         )
-        setReceivedRequests(receivedResponse.data)
+        setReceivedRequests(await receivedResponse.json())
 
-        // Fetch sent friend requests
-        const sentResponse = await axios.get(
+        const sentResponse = await apiRequest(
+          "GET",
           `/friends/sent/${loggedInUserId}`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            Authorization: `Bearer ${token}`,
           }
         )
-        setSentRequests(sentResponse.data)
+        setSentRequests(await sentResponse.json())
 
         setLoading(false)
       } catch (error) {
@@ -58,14 +53,14 @@ const FriendRequests = () => {
   const acceptFriendRequest = async (requestId) => {
     try {
       const token = localStorage.getItem("token")
-      await axios.post(
+      await apiRequest(
+        "POST",
         `/friends/respond`,
-        { requestId, status: "accepted" },
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        JSON.stringify({ requestId, status: "accepted" })
       )
       setReceivedRequests((prevRequests) =>
         prevRequests.filter((request) => request._id !== requestId)
@@ -78,14 +73,14 @@ const FriendRequests = () => {
   const rejectFriendRequest = async (requestId) => {
     try {
       const token = localStorage.getItem("token")
-      await axios.post(
+      await apiRequest(
+        "POST",
         `/friends/respond`,
-        { requestId, status: "rejected" },
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        JSON.stringify({ requestId, status: "rejected" })
       )
       setReceivedRequests((prevRequests) =>
         prevRequests.filter((request) => request._id !== requestId)
@@ -104,51 +99,69 @@ const FriendRequests = () => {
   }
 
   return (
-    <div>
-      <h2>Received Friend Requests</h2>
-      {receivedRequests.length === 0 ? (
-        <p>No received friend requests</p>
-      ) : (
-        <ul>
-          {receivedRequests.map((request, index) => (
-            <li key={request._id || index}>
-              {request.senderId && (
-                <>
-                  <span style={{ color: "black" }}>
-                    {request.senderId.username}
-                  </span>{" "}
-                  sent you a friend request
-                  <button onClick={() => acceptFriendRequest(request._id)}>
-                    Accept
-                  </button>
-                  <button onClick={() => rejectFriendRequest(request._id)}>
-                    Reject
-                  </button>
-                </>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
-      <h2>Sent Friend Requests</h2>
-      {sentRequests.length === 0 ? (
-        <p>No sent friend requests</p>
-      ) : (
-        <ul>
-          {sentRequests.map((request, index) => (
-            <li key={request._id || index}>
-              {request.receiverId && (
-                <>
-                  <span style={{ color: "black" }}>
-                    You sent a friend request to {request.receiverId.username}
-                  </span>
-                </>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <>
+      <div className="title-container">
+        <h2>Requests</h2>
+      </div>
+      <div className="friend-re">
+        <div className="container-page">
+          <h3>Received Friend Requests</h3>
+          {receivedRequests.length === 0 ? (
+            <p>No received friend requests</p>
+          ) : (
+            <ul className="friend-requests-list">
+              {receivedRequests.map((request) => (
+                <li key={request._id} className="friend-request-item">
+                  {request.senderId && (
+                    <>
+                      <p className="friend-name">
+                        {request.senderId.username}
+                      </p>
+                      <p className="request-text">
+                        sent you a friend request
+                      </p>
+                      <div className="button-container">
+                        <button
+                          className="accept-button"
+                          onClick={() => acceptFriendRequest(request._id)}
+                        >
+                          Accept
+                        </button>
+                        <button
+                          className="reject-button"
+                          onClick={() => rejectFriendRequest(request._id)}
+                        >
+                          Reject
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+          <h3>Sent Friend Requests</h3>
+          {sentRequests.length === 0 ? (
+            <p>No sent friend requests</p>
+          ) : (
+            <ul className="friend-requests-list">
+              {sentRequests.map((request) => (
+                <li key={request._id} className="friend-request-item">
+                  {request.receiverId && (
+                    <>
+                      <p className="friend-name">
+                        You sent a friend request to{" "}
+                        {request.receiverId.username}
+                      </p>
+                    </>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </>
   )
 }
 

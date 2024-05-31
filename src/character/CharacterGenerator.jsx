@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import "../css/CharacterGenerator.css"
+import { jsonApiRequest } from "../utils/api"
 
 const CharacterGenerator = () => {
   const [characterDetails, setCharacterDetails] = useState({})
@@ -7,7 +8,8 @@ const CharacterGenerator = () => {
   const [categoryVisibility, setCategoryVisibility] = useState({})
 
   useEffect(() => {
-    fetch("https://my-art-server.onrender.com/api/drawing-details")
+    // fetch("https://my-art-server.onrender.com/api/drawing-details")
+    jsonApiRequest("GET", "/api/drawing-details")
       .then((response) => response.json())
       .then((data) => {
         setCharacterDetails(data)

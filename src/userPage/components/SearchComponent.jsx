@@ -1,8 +1,7 @@
 import React, { useState } from "react"
-import axios from "axios"
+import { apiRequest } from "../../utils/api"
 import { Link } from "react-router-dom"
-
-axios.defaults.baseURL = "https://my-art-server.onrender.com"
+import "../../css/searchComponent.css"
 
 const SearchComponent = () => {
   const [searchTerm, setSearchTerm] = useState("")
@@ -11,8 +10,15 @@ const SearchComponent = () => {
 
   const handleSearch = async () => {
     try {
-      const response = await axios.get(`/search?searchTerm=${searchTerm}`)
-      setSearchResult(response.data)
+      const response = await apiRequest(
+        "GET",
+        `/search?searchTerm=${encodeURIComponent(searchTerm)}`,
+        {
+          "Content-Type": "application/json",
+        }
+      )
+      const data = await response.json()
+      setSearchResult(data)
       setShowResults(true)
     } catch (error) {
       console.error("Error searching users:", error)
@@ -24,35 +30,44 @@ const SearchComponent = () => {
   }
 
   return (
-    <div>
-      <div>
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button onClick={handleSearch}>Search</button>
+    <>
+      <div className="title-container">
+        <h2>Search:</h2>
       </div>
-      {searchResult.length > 0 && (
-        <div>
-          <button onClick={toggleResults}>
-            {showResults ? "Hide" : "Show"}
+      <div className="container-page">
+        <div className="search-bar">
+          <input
+            type="text"
+            id="newMessageInput"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="..."
+          />
+          <button className="user-button" onClick={handleSearch}>
+            Search
           </button>
-          {showResults && (
-            <div>
-              <h2>Search results:</h2>
-              <ul>
-                {searchResult.map((user) => (
-                  <li key={user._id}>
-                    <Link to={`/UserPage/${user._id}`}>{user.username}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
         </div>
-      )}
-    </div>
+        {searchResult.length > 0 && (
+          <div className="results-container">
+            <button className="user-button" onClick={toggleResults}>
+              {showResults ? "Hide Results" : "Show Results"}
+            </button>
+            {showResults && (
+              <div>
+                <h2>Results:</h2>
+                <ul className="results-list">
+                  {searchResult.map((user) => (
+                    <li key={user._id} className="result-item">
+                      <Link to={`/UserPage/${user._id}`}>{user.username}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </>
   )
 }
 

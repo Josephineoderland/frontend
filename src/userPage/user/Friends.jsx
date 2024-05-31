@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react"
-import axios from "axios"
 import { getUserIdFromToken } from "../auth/authUtils"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import { apiRequest } from "../../utils/api"
+import "../../css/friends.css"
 
 const Friends = () => {
   const [friends, setFriends] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchFriends = async () => {
@@ -19,13 +21,16 @@ const Friends = () => {
 
         const loggedInUserId = getUserIdFromToken(token)
 
-        const response = await axios.get(`/friends/friends/${loggedInUserId}`, {
-          headers: {
+        const response = await apiRequest(
+          "GET",
+          `/friends/friends/${loggedInUserId}`,
+          {
             Authorization: `Bearer ${token}`,
-          },
-        })
+          }
+        )
 
-        setFriends(response.data)
+        const friendsData = await response.json()
+        setFriends(friendsData)
         setLoading(false)
       } catch (error) {
         setError("Failed to load friends.")
@@ -40,16 +45,37 @@ const Friends = () => {
   if (error) return <div>{error}</div>
 
   return (
-    <div>
-      <h2>Vänner</h2>
-      <ul>
-        {friends.map((friend, index) => (
-          <li key={index}>
-            <Link to={`/UserPage/${friend._id}`}>{friend.username}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="title-container">
+        <h2>Friends</h2>
+      </div>
+      <div className="container-page">
+        {friends.length === 0 ? (
+          <p>You have not added any friends yet.</p>
+        ) : (
+          <ul className="friends-list">
+            {friends.map((friend, index) => (
+              <li key={index} className="friend-item">
+                {friend.profileImageUrl && (
+                  <img
+                    src={`${process.env.REACT_APP_API_HOST}${friend.profileImageUrl}`}
+                    alt={`${friend.username}'s profile`}
+                    className="friend-profile-image"
+                  />
+                )}
+                <p className="friend-name">{friend.username}</p>
+                <button
+                  className="user-button"
+                  onClick={() => navigate(`/userPage/${friend._id}`)}
+                >
+                  Friend's Page
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </>
   )
 }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import "../css/generate.css"
+import { jsonApiRequest } from "../utils/api"
 
 const WhoAndWhatG = () => {
   const [character, setCharacter] = useState("")
@@ -7,29 +8,32 @@ const WhoAndWhatG = () => {
   const [showContent, setShowContent] = useState(false)
 
   useEffect(() => {
-    fetch("https://my-art-server.onrender.com/api/characters")
-      .then((response) => response.json())
-      .then((data) => {
-        const randomCharacter = data[Math.floor(Math.random() * data.length)]
-        setCharacter(randomCharacter.name)
-      })
-      .catch((error) => console.error("Error fetching characters:", error))
-
-    fetch("https://my-art-server.onrender.com/api/activities")
-      .then((response) => response.json())
-      .then((data) => {
-        const randomActivity = data[Math.floor(Math.random() * data.length)]
-        setActivity(randomActivity.name)
-      })
-      .catch((error) => console.error("Error fetching activities:", error))
+    // fetch("https://my-art-server.onrender.com/api/characters")
+    jsonApiRequest("GET", "/api/characters")
+    .then((response) => response.json())
+    .then((data) => {
+      const randomCharacter = data[Math.floor(Math.random() * data.length)]
+      setCharacter(randomCharacter.name)
+    })
+    .catch((error) => console.error("Error fetching characters:", error))
+    
+    // fetch("https://my-art-server.onrender.com/api/activities")
+    jsonApiRequest("GET", "/api/activities")
+    .then((response) => response.json())
+    .then((data) => {
+      const randomActivity = data[Math.floor(Math.random() * data.length)]
+      setActivity(randomActivity.name)
+    })
+    .catch((error) => console.error("Error fetching activities:", error))
   }, [])
-
+  
   const generateRandom = () => {
     setShowContent(false)
-
-    const characterPromise = fetch(
-      "https://my-art-server.onrender.com/api/characters"
-    )
+    
+    const characterPromise = jsonApiRequest("GET", "/api/characters")
+    // const characterPromise = fetch(
+      //   "https://my-art-server.onrender.com/api/characters"
+      // )
       .then((response) => response.json())
       .then((data) => {
         const randomCharacter = data[Math.floor(Math.random() * data.length)]
@@ -39,10 +43,11 @@ const WhoAndWhatG = () => {
         console.error("Error fetching characters:", error)
         setCharacter("")
       })
-
-    const activityPromise = fetch(
-      "https://my-art-server.onrender.com/api/activities"
-    )
+      
+      // const activityPromise = fetch(
+      //   "https://my-art-server.onrender.com/api/activities"
+      // )
+    const activityPromise = jsonApiRequest("GET", "/api/activities")
       .then((response) => response.json())
       .then((data) => {
         const randomActivity = data[Math.floor(Math.random() * data.length)]

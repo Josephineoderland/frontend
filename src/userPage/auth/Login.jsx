@@ -4,7 +4,8 @@ import { getUserIdFromToken } from "./authUtils"
 import "../../css/log-reg.css"
 import userIcon from "../../assets/user_1251070.png"
 import passwordIcon from "../../assets/lock_12484073.png"
-import fillImg from "../../assets/Namnlöst-8.png"
+import fillImg from "../../assets/Namnlöst-8.png"
+import { jsonApiRequest } from "../../utils/api"
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState("")
@@ -18,31 +19,37 @@ const Login = ({ onLogin }) => {
   const handleLogin = async () => {
     setIsLoading(true)
     try {
-      const response = await fetch(
-        "https://my-art-server.onrender.com/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, password }),
-        }
-      )
+      const response = await jsonApiRequest("POST", "/auth/login", {
+        username,
+        password,
+      })
+      // const response = await fetch(
+      //   "https://my-art-server.onrender.com/auth/login",
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({ username, password }),
+      //   }
+      // )
 
       if (!response.ok) {
         const errorData = await response.json()
-        throw new Error(errorData.message || "Inloggningen misslyckades.")
+        throw new Error(errorData.message || "Login failed.")
       }
 
       const data = await response.json()
       const token = data.token
-      localStorage.setItem("token", token)
-      onLogin(token)
-      setLoggedIn(true)
-      const loggedInUserId = getUserIdFromToken(token)
-      onLogin(loggedInUserId)
+      if (token) {
+        localStorage.setItem("token", token)
+        onLogin(token)
+        setLoggedIn(true)
+        const loggedInUserId = getUserIdFromToken(token)
+        onLogin(loggedInUserId)
+      }
     } catch (error) {
-      setError(error.message)
+      setError(error.message || "Login failed.")
     } finally {
       setIsLoading(false)
     }

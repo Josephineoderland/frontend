@@ -18,6 +18,8 @@ import PrivateChat from "./userPage/user/PrivateChat"
 import FriendRequests from "./userPage/user/FriendRequests"
 import UserPage from "./userPage/user/UserPage"
 import { isLoggedIn } from "./userPage/auth/authUtils"
+import Chat from "./userPage/user/Chat"
+import SearchComponent from "./userPage/components/SearchComponent"
 
 const AppRoutes = ({ onLogin, onRegister }) => {
   return (
@@ -36,13 +38,15 @@ const AppRoutes = ({ onLogin, onRegister }) => {
       <Route path="/login" element={<Login onLogin={onLogin} />} />
       <Route path="/register" element={<Register onRegister={onRegister} />} />
       <Route
-        path="/MyPage/*"
+        path="/my-page/*"
         element={isLoggedIn() ? <MyPage /> : <Navigate to="/login" />}
       >
         <Route path="friends" element={<Friends />} />
+        <Route path="chat" element={<Chat />} />
         <Route path="liked-posts" element={<LikedPosts />} />
-        <Route path="private-chat" element={<PrivateChat />} />
+        <Route path="private-chat/:friendId" element={<PrivateChat />} />
         <Route path="friend-requests" element={<FriendRequests />} />
+        <Route path="search-component" element={<SearchComponent/>} />
       </Route>
       <Route path="/UserPage/:userId" element={<UserPage />} />
     </Routes>

@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react"
+
 import "../css/ChatPage.css"
+import { apiRequest, jsonApiRequest } from "../utils/api"
 
 const ChatPage = () => {
   const [messages, setMessages] = useState([])
@@ -11,6 +13,7 @@ const ChatPage = () => {
   const [isFileUploading, setIsFileUploading] = useState(false)
   const [fileName, setFileName] = useState("my file")
   const [userName, setUserName] = useState("")
+  const [likedMessages, setLikedMessages] = useState([])
 
   useEffect(() => {
     setIsLoading(true)
@@ -19,9 +22,7 @@ const ChatPage = () => {
 
   const fetchMessages = async () => {
     try {
-      const response = await fetch(
-        "https://my-art-server.onrender.com/messages"
-      )
+      const response = await jsonApiRequest("GET", "/messages")
       const data = await response.json()
       setMessages(data)
       setIsLoading(false)
@@ -49,21 +50,13 @@ const ChatPage = () => {
         if (imageFile) {
           formData.append("image", imageFile)
         }
-        const data = {
+    
+        
+        const response = await jsonApiRequest("POST", "/messages", {
           text: newMessage,
           user: userName,
-        }
-
-        const response = await fetch(
-          "https://my-art-server.onrender.com/messages",
-          {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
+        })
+    
         if (response.ok) {
           const data = await response.json()
           setMessages([...messages, data])
@@ -100,13 +93,7 @@ const ChatPage = () => {
           const formData = new FormData()
           formData.append("file", imageFile)
 
-          const response = await fetch(
-            "https://my-art-server.onrender.com/messages",
-            {
-              method: "POST",
-              body: formData,
-            }
-          )
+          const response = await apiRequest("POST", "/messages", {}, formData)
 
           if (response.ok) {
             setIsFileUploading(false)
@@ -146,27 +133,44 @@ const ChatPage = () => {
     }
   }
 
-  const likeMessage = async (messageId) => {
+  const toggleLike = async (messageId, actionType) => {
     try {
-      const response = await fetch(
-        `https://my-art-server.onrender.com/messages/${messageId}/like`,
-        {
-          method: "POST",
-        }
-      )
+      let newLikes = 0
+      if (actionType === "like") {
+        newLikes = 1
+      } else if (actionType === "unlike") {
+        newLikes = -1
+      }
+
+      const response = await jsonApiRequest("POST", `/messages/${messageId}/like`, {
+        likes: newLikes
+      })
+  
+
       if (response.ok) {
         const updatedMessages = messages.map((message) => {
           if (message._id === messageId) {
-            return { ...message, likes: message.likes + 1 }
+            return { ...message, likes: message.likes + newLikes }
           }
           return message
         })
+
+        // Uppdatera likedMessages baserat på åtgärden
+        if (actionType === "like" && !likedMessages.includes(messageId)) {
+          setLikedMessages([...likedMessages, messageId])
+        } else if (
+          actionType === "unlike" &&
+          likedMessages.includes(messageId)
+        ) {
+          setLikedMessages(likedMessages.filter((id) => id !== messageId))
+        }
+
         setMessages(updatedMessages)
       } else {
-        console.error("Failed to like message, Response:", response)
+        console.error("Failed to toggle like/unlike, Response:", response)
       }
     } catch (error) {
-      console.error("Error liking message:", error)
+      console.error("Error toggling like/unlike:", error)
     }
   }
 
@@ -185,7 +189,7 @@ const ChatPage = () => {
 
   return (
     <div className="chat-container">
-      <form onSubmit={sendMessage}>
+      <form className="my-form" onSubmit={sendMessage}>
         <h3 className="text-label">Your Name</h3>
         <input
           type="text"
@@ -230,7 +234,11 @@ const ChatPage = () => {
             <p className="uploading-message">Uploading file...</p>
           )}
         </div>
-        <button className="fill-button" type="submit" disabled={isFileUploading}>
+        <button
+          className="fill-button"
+          type="submit"
+          disabled={isFileUploading}
+        >
           Send
         </button>
       </form>
@@ -244,9 +252,15 @@ const ChatPage = () => {
             <div className="message-footer">
               <button
                 style={{ backgroundColor: "black", color: "white" }}
-                onClick={() => likeMessage(message._id)}
+                onClick={() =>
+                  toggleLike(
+                    message._id,
+                    likedMessages.includes(message._id) ? "unlike" : "like"
+                  )
+                }
               >
-                ♥ {message.likes}
+                 {likedMessages.includes(message._id) ? "❤️️" : "♥"}{" "}
+                {message.likes}
               </button>
               <small>{getTimeSinceMessage(message.createdAt)}</small>
             </div>

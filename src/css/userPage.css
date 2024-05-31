@@ -1,0 +1,68 @@
+.user-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.user-info-container {
+  border: 1px solid black;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.user-info h3 {
+  color: black;
+}
+
+.user-info a {
+  color: rgb(0, 0, 0);
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.post {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.post img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
+}
+
+.post p {
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.no-posts-message {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+}

@@ -1,7 +1,18 @@
+:root {
+  --primary-color: #D96AA7;
+  --secondary-color: #cbcbcb;
+  --complimentary-color: #88BFB5;
+  --contrast-color: #F2E527;
+  --light-color: #D2A9D9;
+  --fun-color: #cd1cec;
+}
+
 body {
   padding: 0;
   margin: 0;
   background-color: #ffffff;
+  overflow-y: auto;
+  /* Prevents vertical scrolling */
 }
 
 /*Title*/
@@ -20,6 +31,8 @@ h2 {
   font-weight: 500;
   font-style: normal;
   letter-spacing: 4px;
+
+  color: #333;
 }
 
 h3 {
@@ -55,7 +68,75 @@ p {
   margin-top: 0px;
 }
 
-.arrow-more,
-p {
+.arrow-more p {
   margin-bottom: 20px;
+}
+
+.user-button {
+  padding: 10px 10px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 15px;
+  font-family: "Bodoni Moda", serif;
+  font-weight: 500;
+}
+
+.user-button:hover {
+  background-color: #333;
+}
+
+.container-page {
+  margin: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container-page h2 {
+  margin-bottom: 20px;
+}
+
+#newMessageInput {
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 90%;
+  font-family: "Fira Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#newMessageInput:focus {
+  outline: none;
+  border-color: #6f6f6f;
+}
+
+.my-form {
+  border: 1px solid #000000;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 7px 7px;
+}
+
+.friends-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.friend-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
