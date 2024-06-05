@@ -1,5 +1,4 @@
 import "../css/Draw.css"
-import IconSVG from "../assets/Chevron.svg"
 import ImgOne from "../assets/drawN.jpg"
 import ImgTwo from "../assets/drawNA.jpg"
 import { Link } from "react-router-dom"
@@ -40,12 +39,7 @@ const Character = () => {
 
       <div className="arrow-more">
         <p onClick={handleScroll}>More</p>
-        <img
-          src={IconSVG}
-          alt="SVG Icon"
-          onClick={handleScroll}
-          style={{ cursor: "pointer" }}
-        />
+        <i className="fas fa-chevron-down" style={{ cursor: "pointer" }}></i>
       </div>
       <div className="page-img">
         <div className="container">

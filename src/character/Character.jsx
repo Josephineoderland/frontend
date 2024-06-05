@@ -1,6 +1,5 @@
 import React from "react"
 import "../css/Draw.css"
-import IconSVG from "../assets/Chevron.svg"
 import ImgOne from "../assets/pexels-craytive-1478477.jpg"
 import ImgTwo from "../assets/CHAR.jpg"
 import { Link } from "react-router-dom"
@@ -41,12 +40,7 @@ const Character = () => {
 
       <div className="arrow-more">
         <p onClick={handleScroll}>More</p>
-        <img
-          src={IconSVG}
-          alt="SVG Icon"
-          onClick={handleScroll}
-          style={{ cursor: "pointer" }}
-        />
+        <i className="fas fa-chevron-down" style={{ cursor: "pointer" }}></i>
       </div>
       <div className="page-img">
         <div className="container">

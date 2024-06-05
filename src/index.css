@@ -31,7 +31,6 @@ h2 {
   font-weight: 500;
   font-style: normal;
   letter-spacing: 4px;
-
   color: #333;
 }
 
@@ -66,6 +65,11 @@ p {
   flex-direction: column;
   align-items: center;
   margin-top: 0px;
+}
+
+.fa-chevron-down {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .arrow-more p {
@@ -119,7 +123,7 @@ p {
 .my-form {
   border: 1px solid #000000;
   padding: 10px;
-  margin: 10px;
+
   box-shadow: 7px 7px;
 }
 
@@ -139,4 +143,43 @@ p {
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+img {
+  max-width: 100%;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: solid 1px #878787;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+}
+
+#newMessageInput.searchTerm {
+  width: 100%;
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  color: #000000;
+}
+
+.app-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #000000;
+  color: white;
+  text-align: center;
+  padding: 12px 0;
+}
+
+.footer-content p {
+  margin: 0;
 }

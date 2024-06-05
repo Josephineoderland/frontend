@@ -105,7 +105,7 @@ const FriendRequests = () => {
       </div>
       <div className="friend-re">
         <div className="container-page">
-          <h3>Received Friend Requests</h3>
+          <h3>Received Friend Requests</h3>{" "}
           {receivedRequests.length === 0 ? (
             <p>No received friend requests</p>
           ) : (
@@ -114,12 +114,8 @@ const FriendRequests = () => {
                 <li key={request._id} className="friend-request-item">
                   {request.senderId && (
                     <>
-                      <p className="friend-name">
-                        {request.senderId.username}
-                      </p>
-                      <p className="request-text">
-                        sent you a friend request
-                      </p>
+                      <p className="friend-name">{request.senderId.username}</p>{" "}
+                      <p className="request-text">sent you a friend request</p>
                       <div className="button-container">
                         <button
                           className="accept-button"

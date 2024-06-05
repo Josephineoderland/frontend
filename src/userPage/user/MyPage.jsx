@@ -97,7 +97,6 @@ const MyPage = () => {
 
   return (
     <div className="my-page">
-     
       <Sidebar />
       <main className="content-wrapper">
         {isMainPage && (
@@ -153,7 +152,7 @@ const MyPage = () => {
                       </p>
                       <p>
                         <i className="fas fa-birthday-cake"></i>{" "}
-                        {userSettings.age} {userSettings.age ? "year old" : ""}
+                        {userSettings.age} {userSettings.age ? "years old" : ""}
                       </p>
                       <p>
                         <i className="fas fa-briefcase"></i>{" "}

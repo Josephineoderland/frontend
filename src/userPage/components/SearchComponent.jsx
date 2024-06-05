@@ -42,9 +42,10 @@ const SearchComponent = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="..."
+            className="searchTerm"
           />
-          <button className="user-button" onClick={handleSearch}>
-            Search
+          <button className="searchButton" onClick={handleSearch}>
+            <i className="fas fa-search"></i>
           </button>
         </div>
         {searchResult.length > 0 && (

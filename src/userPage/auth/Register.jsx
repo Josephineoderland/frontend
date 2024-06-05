@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react"
 import { useNavigate } from "react-router-dom"
 import { getUserIdFromToken } from "../auth/authUtils"
-import userIcon from "../../assets/user_1251070.png"
-import passwordIcon from "../../assets/lock_12484073.png"
 import "../../css/log-reg.css"
 import fillImg from "../../assets/Namnlöst-8.png"
 import { apiRequest } from "../../utils/api" // Importera din API-funktion
@@ -73,6 +71,19 @@ const Register = ({ onRegister }) => {
     setProfileImage(e.target.files[0])
   }
 
+  const shortenFileName = (name, maxLength = 20) => {
+    // Kontrollera om namnet är kortare än maxLength
+    if (name.length <= maxLength) {
+      return name
+    }
+
+    // Dela namnet vid första slashen och ta de första delarna
+    const parts = name.split("/")
+    const shortenedName = `${parts[0].substring(0, maxLength - 3)}...`
+
+    return shortenedName
+  }
+
   return (
     <div className="fill-container">
       <div className="fill-in">
@@ -80,11 +91,7 @@ const Register = ({ onRegister }) => {
           <h3>Register Now</h3>
         </div>
         <div className="input-container">
-          <img
-            src={userIcon}
-            alt="User Icon"
-            className="input-icon user-icon"
-          />
+          <i className="fas fa-user input-icon user-icon"></i>{" "}
           <input
             type="text"
             value={username}
@@ -94,11 +101,7 @@ const Register = ({ onRegister }) => {
           />
         </div>
         <div className="input-container">
-          <img
-            src={passwordIcon}
-            alt="Password Icon"
-            className="input-icon password-icon"
-          />
+          <i className="fas fa-lock input-icon password-icon"></i>{" "}
           <input
             type="password"
             value={password}
@@ -108,12 +111,25 @@ const Register = ({ onRegister }) => {
           />
         </div>
         <div className="input-container">
-          <input
-            type="file"
-            onChange={handleFileChange}
-            accept="image/*"
-            disabled={isLoading}
-          />
+          <i className="fas fa-file-alt input-icon file-icon"></i>
+          <div className="file-upload-container">
+            <label htmlFor="fileInput" className="file-upload-label">
+              Choose a file:{" "}
+              <span className="file-name">
+                {profileImage
+                  ? shortenFileName(profileImage.name)
+                  : "No file chosen"}
+              </span>
+            </label>
+            <input
+              type="file"
+              id="fileInput"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="file-upload-input"
+              hidden
+            />
+          </div>
         </div>
         <div className="fill-img">
           <img src={fillImg} alt="User Icon" className="input-img" />

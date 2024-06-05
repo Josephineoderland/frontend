@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { io } from "socket.io-client"
 import { getUserIdFromToken } from "../auth/authUtils"
 import { apiRequest } from "../../utils/api"
+import "../../css/privateChat.css"
 
 const PrivateChat = () => {
   const { friendId } = useParams()
@@ -14,11 +15,9 @@ const PrivateChat = () => {
   useEffect(() => {
     const token = localStorage.getItem("token")
 
-    // const userId = getUserIdFromToken(localStorage.getItem("token"))
     apiRequest("GET", `/private-chat/messages/${friendId}`, {
       Authorization: `Bearer ${token}`,
     }).then(async (v) => {
-      // console.log(await v.text())
       const data = await v.json()
       if (data) {
         data.forEach((msg) => {
@@ -43,8 +42,17 @@ const PrivateChat = () => {
     if (!socket) return
 
     socket.on("message", (message) => {
-      console.log(message)
-      setMessages((prevMessages) => [...prevMessages, message])
+   
+      const currentUserId = getUserIdFromToken(localStorage.getItem("token"))
+
+      const isSenderLeft = message.userId === currentUserId
+
+      const formattedMessage = {
+        ...message,
+        isSenderLeft,
+      }
+
+      setMessages((prevMessages) => [...prevMessages, formattedMessage])
     })
 
     return () => {
@@ -79,7 +87,7 @@ const PrivateChat = () => {
       <h2>Private Chat</h2>
       <ul>
         {messages.map((message, index) => (
-          <li key={index}>
+          <li key={index} className={message.isSenderLeft ? "left" : "right"}>
             <strong>{message.sender}: </strong> {message.text}
           </li>
         ))}
