@@ -114,11 +114,11 @@ const Register = ({ onRegister }) => {
           <i className="fas fa-file-alt input-icon file-icon"></i>
           <div className="file-upload-container">
             <label htmlFor="fileInput" className="file-upload-label">
-              Choose a file:{" "}
+              select a profile picture:{" "}
               <span className="file-name">
                 {profileImage
                   ? shortenFileName(profileImage.name)
-                  : "No file chosen"}
+                  : "No picture chosen"}
               </span>
             </label>
             <input

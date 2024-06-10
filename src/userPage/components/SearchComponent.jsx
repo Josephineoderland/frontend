@@ -7,6 +7,7 @@ const SearchComponent = () => {
   const [searchTerm, setSearchTerm] = useState("")
   const [searchResult, setSearchResult] = useState([])
   const [showResults, setShowResults] = useState(true)
+  const [errorMessage, setErrorMessage] = useState("") // State variable for error message
 
   const handleSearch = async () => {
     try {
@@ -18,10 +19,18 @@ const SearchComponent = () => {
         }
       )
       const data = await response.json()
-      setSearchResult(data)
-      setShowResults(true)
+      if (data.length > 0) {
+        setSearchResult(data)
+        setShowResults(true)
+        setErrorMessage("") // Clear any previous error message
+      } else {
+        setSearchResult([])
+        setShowResults(false)
+        setErrorMessage("User not found") // Set error message if no users found
+      }
     } catch (error) {
       console.error("Error searching users:", error)
+      setErrorMessage("An error occurred while searching users") // Set error message on catch
     }
   }
 
@@ -48,6 +57,11 @@ const SearchComponent = () => {
             <i className="fas fa-search"></i>
           </button>
         </div>
+        {errorMessage && (
+          <div className="error-message">
+            <p>{errorMessage}</p>
+          </div>
+        )}
         {searchResult.length > 0 && (
           <div className="results-container">
             <button className="user-button" onClick={toggleResults}>

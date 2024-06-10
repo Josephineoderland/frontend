@@ -1,7 +1,39 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { apiRequest } from "../../utils/api"
 import "../../css/sidebar.css"
+
 const Sidebar = () => {
+  const [unreadMessages, setUnreadMessages] = useState(0)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const fetchUnreadMessages = async () => {
+      try {
+        const token = localStorage.getItem("token")
+        if (!token) {
+          console.error("No token available")
+          return
+        }
+
+        const response = await apiRequest("GET", `/private-chat/unread-count`, {
+          Authorization: `Bearer ${token}`,
+        })
+
+        const data = await response.json()
+        setUnreadMessages(data.unreadCount)
+      } catch (error) {
+        console.error("Failed to load unread messages count:", error)
+      }
+    }
+
+    fetchUnreadMessages()
+  }, [])
+
+  const handleChatClick = () => {
+    navigate("/my-page/chat")
+  }
+
   return (
     <div className="sidebar">
       <ul>
@@ -16,9 +48,12 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/my-page/chat">
+          <span onClick={handleChatClick}>
             <i className="fas fa-comments"></i>
-          </Link>
+            {unreadMessages > 0 && (
+              <span className="unread-count">{unreadMessages}</span>
+            )}
+          </span>
         </li>
         <li>
           <Link to="/my-page/search-component">
@@ -27,7 +62,7 @@ const Sidebar = () => {
         </li>
         <li>
           <Link to="/my-page/friend-requests">
-            <i className="fas fa-exchange-alt"></i> 
+            <i className="fas fa-exchange-alt"></i>
           </Link>
         </li>
       </ul>

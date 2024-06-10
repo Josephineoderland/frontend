@@ -21,9 +21,8 @@ const PrivateChat = () => {
       const data = await v.json()
       if (data) {
         data.forEach((msg) => {
-          console.log(msg)
+          addMessageToChat(msg)
         })
-        setMessages((prevMessages) => [...data, ...prevMessages])
       }
     })
 
@@ -38,21 +37,25 @@ const PrivateChat = () => {
     }
   }, [friendId])
 
+  const addMessageToChat = (message) => {
+    const currentUserId = getUserIdFromToken(localStorage.getItem("token"))
+
+    const isSenderLeft = message.userId !== currentUserId
+
+    const formattedMessage = {
+      ...message,
+      isSenderLeft,
+      timestamp: new Date(message.timestamp || Date.now()).toLocaleTimeString(), // Added timestamp
+    }
+
+    setMessages((prevMessages) => [...prevMessages, formattedMessage])
+  }
+
   useEffect(() => {
     if (!socket) return
 
     socket.on("message", (message) => {
-   
-      const currentUserId = getUserIdFromToken(localStorage.getItem("token"))
-
-      const isSenderLeft = message.userId === currentUserId
-
-      const formattedMessage = {
-        ...message,
-        isSenderLeft,
-      }
-
-      setMessages((prevMessages) => [...prevMessages, formattedMessage])
+      addMessageToChat(message)
     })
 
     return () => {
@@ -83,26 +86,37 @@ const PrivateChat = () => {
   }
 
   return (
-    <div>
+    <>
       <h2>Private Chat</h2>
-      <ul>
-        {messages.map((message, index) => (
-          <li key={index} className={message.isSenderLeft ? "left" : "right"}>
-            <strong>{message.sender}: </strong> {message.text}
-          </li>
-        ))}
-        <div ref={messagesEndRef} />
-      </ul>
-      <form onSubmit={sendMessage}>
-        <input
-          type="text"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="Type a message..."
-        />
-        <button type="submit">Send</button>
-      </form>
-    </div>
+      <div className="private-chat-container">
+        <div className="private-msg">
+          <ul>
+            {messages.map((message, index) => (
+              <li
+                key={index}
+                className={message.isSenderLeft ? "left" : "right"}
+              >
+                <div className="message-priv">
+                  <strong>{message.sender}: </strong> {message.text}
+                </div>
+              </li>
+            ))}
+            <div ref={messagesEndRef} />
+          </ul>
+        </div>
+        <form className="private-form" onSubmit={sendMessage}>
+          <input
+            type="text"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            placeholder="Type a message..."
+          />
+          <button className="fill-button" type="submit">
+            Send
+          </button>
+        </form>
+      </div>
+    </>
   )
 }
 

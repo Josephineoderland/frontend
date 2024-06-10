@@ -45,22 +45,22 @@ const Character = () => {
       <div className="page-img">
         <div className="container">
           <img src={ImgOne} alt="img one" className="one" />
-          <h3>Lorem Ipsum</h3>
+          <h3>Bosse Ängman </h3>
           <p>Lorem ipsum lorem ipsum lorem ipsum</p>
         </div>
         <div className="container">
           <img src={ImgTwo} alt="img two" className="two" />
-          <h3>Lorem Ipsum</h3>
+          <h3>Viktor Rüdén</h3>
           <p>Lorem ipsum lorem ipsum lorem ipsum</p>
         </div>
         <div className="container">
           <img src={ImgOne} alt="img three" className="three" />
-          <h3>Lorem Ipsum</h3>
+          <h3>Josephine Oderland</h3>
           <p>Lorem ipsum lorem ipsum lorem ipsum</p>
         </div>
         <div className="container">
           <img src={ImgTwo} alt="img fore" className="fore" />
-          <h3>Lorem Ipsum</h3>
+          <h3>Karin Holm</h3>
           <p>Lorem ipsum lorem ipsum lorem ipsum</p>
         </div>
       </div>
