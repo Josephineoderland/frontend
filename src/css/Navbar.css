@@ -5,7 +5,7 @@
 .navbar {
   background-color: #000000;
   color: #fff;
-  padding: px 0px;
+  padding: 0px;
   display: flex;
   flex-direction: column;
 }
@@ -15,7 +15,6 @@
   padding: 0;
   display: flex;
   justify-content: space-around;
-
 }
 
 .nav-item p {
@@ -36,7 +35,6 @@
   padding: 0 20px;
 }
 
-
 .brand-mark {
   display: inline-block;
   width: 30px;
@@ -47,12 +45,13 @@
   text-align: center;
   line-height: 30px;
   font-weight: 100;
+  padding: 5px;
+  letter-spacing: 20px;
 }
 
 .sub-menu-row {
   display: flex;
   justify-content: space-around;
-  align-self: center;
   border-top: 2px solid#fff;
   padding-bottom: 10px;
 }
@@ -60,7 +59,6 @@
 .sub-menu-row ul {
   display: flex;
   flex-direction: row;
- 
   padding: 0;
   margin: 0;
 }
@@ -96,3 +94,114 @@
   background-color: transparent;
   border: none;
 }
+
+@media (min-width:760px) and (max-width: 1024px) {
+  .navbar-button .user-icon-btn {
+    margin: 20px;
+
+  }
+
+  .user-menu {
+    padding: 15px;
+  }
+
+  .navbar-title {
+    margin: 20px;
+  }
+
+  .sub-menu-row {
+    display: flex;
+    justify-content: space-around;
+
+    border-top: 5px solid#fff;
+    padding-top: 10px;
+  }
+
+  .brand-mark {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #000000;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    padding: 5px;
+  }
+}
+
+/*@media (min-width: 1025px) and (max-width: 1080px) {
+ .user-menu {
+    position: absolute;
+    bottom: 80.6%;
+    left: 27%;
+    width: 71.2%;
+    z-index: 1;
+  }*/
+
+/*.home .navbar {
+    position: absolute;
+    bottom: 79.4%;
+    left: 29%;
+    width: 72.2%;
+    z-index: 1;
+  }*/
+
+/*.sub-menu-row {
+    position: absolute;
+    background-color: #000000;
+    bottom: -70%;
+    left: 0%;
+    width: 101.2%;
+    z-index: 1;
+  }
+}
+*/
+@media (min-width: 1025px) {
+  .navbar-header {
+    padding: 0 20px;
+  }
+
+  .navbar-title {
+    margin: 20px;
+  }
+
+  .brand-mark {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #000000;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    padding: 5px;
+  }
+
+}
+
+/*.user-menu {
+    position: absolute;
+    bottom: 80.6%;
+    left: 30.4%;
+    width: 68%;
+    z-index: 1;
+  }
+
+  .navbar {
+    position: absolute;
+    bottom: 79.4%;
+    left: 30%;
+    width: 70%;
+    z-index: 1;
+
+  }
+
+  .sub-menu-row {
+    position: absolute;
+    background-color: #000000;
+    bottom: -70%;
+    left: 0%;
+    width: 100%;
+    z-index: 1;
+  }*/

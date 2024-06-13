@@ -1,12 +1,15 @@
 .my-page {
   border-top: 2px solid black;
   display: flex;
-  position: relative;
-  overflow: hidden;
+}
+
+.my-page-container {
+  min-height: calc(100vh - 130px);
 }
 
 .content-wrapper {
-  flex: 1;
+  width: 100%;
+  height: 100%;
   padding: 20px;
 }
 
@@ -21,20 +24,10 @@
   margin-right: 10px;
 }
 
-.profile-image {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-  border: 1px solid black;
-}
-
 .title-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
   margin: 10px;
   padding: 10px;
 }
@@ -60,12 +53,6 @@
   margin: auto;
 }
 
-.user-info-container {
-  border: 1px solid black;
-  margin: 10px;
-  padding: 10px;
-}
-
 .user-info h3 {
   color: black;
 }
@@ -78,29 +65,33 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
-  padding: 20px 0 ;
+  padding: 20px 0;
 }
 
 .post {
-  background-color: #fff;
+  background-image: url(../assets/pin.png);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: 50px;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
 }
 
 .post img {
   width: 100%;
   height: auto;
-  border-bottom: 1px solid #ddd;
 }
 
 .post p {
   padding: 10px;
-  font-size: 16px;
   color: #333;
+  margin-top: 20px;
 }
 
 .post-time {
@@ -108,4 +99,96 @@
   font-size: 12px;
   color: #888;
   text-align: right;
+}
+
+@media (min-width:760px) and (max-width: 1024px) {
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group i {
+    padding: 10px;
+  }
+
+  .user-info h3 {
+    margin-bottom: 10px;
+  }
+
+  .title-container {
+    width: 100%;
+    margin: 30px;
+    padding: 10px;
+  }
+
+  .popup-form-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .post p {
+    font-size: 20px;
+  }
+
+  .post {
+    justify-content: space-between;
+  }
+
+  .posts {
+    margin: 30px;
+  }
+
+  .desk-my-container {
+    display: flex;
+    justify-content: center;
+    margin: 0 60px;
+  }
+
+  .my-form-container {
+    display: flex;
+    justify-content: center;
+    margin: 0 60px;
+  }
+
+  .my-page-container {
+    min-height: calc(100vh - 220px);
+  }
+}
+
+@media (min-width: 1025px) {
+  .content-wrapper {
+
+    margin: 60px 100px;
+
+  }
+
+  .my-page-container {
+    min-height: calc(100vh - 360px);
+  }
+
+  .combined-container {
+    background-color: #ccc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid black;
+  }
+
+  .popup-form-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .post {
+    background-color: white;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
+  }
+
+  .posts {
+    background-color: #ccc;
+    margin-top: 20px;
+    padding: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    border: 2px solid black;
+  }
 }

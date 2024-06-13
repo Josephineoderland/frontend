@@ -45,8 +45,9 @@ const PrivateChat = () => {
     const formattedMessage = {
       ...message,
       isSenderLeft,
-      timestamp: new Date(message.timestamp || Date.now()).toLocaleTimeString(), // Added timestamp
+      timestamp: new Date(message.timestamp || Date.now()), // Added timestamp
     }
+    console.log(formattedMessage.timestamp)
 
     setMessages((prevMessages) => [...prevMessages, formattedMessage])
   }
@@ -87,7 +88,6 @@ const PrivateChat = () => {
 
   return (
     <>
-      <h2>Private Chat</h2>
       <div className="private-chat-container">
         <div className="private-msg">
           <ul>
@@ -111,7 +111,7 @@ const PrivateChat = () => {
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Type a message..."
           />
-          <button className="fill-button" type="submit">
+          <button className="fill-button privet" type="submit">
             Send
           </button>
         </form>

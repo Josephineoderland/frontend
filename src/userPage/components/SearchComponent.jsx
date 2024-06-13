@@ -44,7 +44,7 @@ const SearchComponent = () => {
         <h2>Search:</h2>
       </div>
       <div className="container-page">
-        <div className="search-bar">
+        <div className="search-bar my">
           <input
             type="text"
             id="newMessageInput"

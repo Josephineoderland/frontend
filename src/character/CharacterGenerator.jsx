@@ -53,25 +53,31 @@ const CharacterGenerator = () => {
           Generate Character
         </button>
       </div>
-      {Object.keys(characterDetails).map((category) => (
-        <div key={category} className={`category-box category-${category}`}>
-          <h3 onClick={() => toggleCategoryVisibility(category)}>
-            {category}:
-          </h3>
-          {categoryVisibility[category] && (
-            <ul>
-              {Object.keys(selectedProperties[category] || {}).map(
-                (subcategory) => (
-                  <li key={subcategory}>
-                    <strong>{subcategory}:</strong>{" "}
-                    {selectedProperties[category][subcategory]}
-                  </li>
-                )
-              )}
-            </ul>
-          )}
-        </div>
-      ))}
+      <div className="character-page">
+        <div className="generate-container">
+        {Object.keys(characterDetails).map((category) => (
+          <div key={category} className={`category-box category-${category}`}>
+            <h3 onClick={() => toggleCategoryVisibility(category)}>
+              {category}:
+            </h3>
+            {categoryVisibility[category] && (
+              <ul>
+                {Object.keys(selectedProperties[category] || {}).map(
+                  (subcategory) => (
+                    <li key={subcategory}>
+                      <p>{subcategory}:</p>{" "}
+                      <p style={{ marginLeft: "10px" }}>
+                        {selectedProperties[category][subcategory]}
+                      </p>
+                    </li>
+                  )
+                )}
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
     </div>
   )
 }

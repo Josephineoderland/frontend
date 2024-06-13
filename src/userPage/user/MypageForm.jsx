@@ -42,7 +42,7 @@ const MyPageForm = ({ token }) => {
   }
 
   return (
-    <div>
+    <div className="my-form-container">
       <form className="my-form" onSubmit={handleSubmit}>
         <h3 className="text-label">Text:</h3>
         <input
@@ -64,6 +64,7 @@ const MyPageForm = ({ token }) => {
             accept="image/*"
             onChange={handleFileUpload}
             className="file-upload-input"
+            hidden
           />
           {isFileUploading && (
             <p className="uploading-message">Uploading file...</p>

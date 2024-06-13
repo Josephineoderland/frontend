@@ -5,6 +5,8 @@ color: black;
 .friend-requests-list {
   list-style-type: none;
   padding: 0;
+  max-height: 200px; 
+  overflow-y: auto;
 }
 
 .friend-request-item {
@@ -58,4 +60,10 @@ color: black;
 
 .reject-button:hover {
   background-color: #984a52;
+}
+
+@media (min-width:760px) and (max-width: 1024px) {
+  .header-container {
+    margin: 30px;
+  }
 }

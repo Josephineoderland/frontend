@@ -1,17 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react"
-
 import "../css/ChatPage.css"
-import { apiRequest, jsonApiRequest } from "../utils/api"
+import { jsonApiRequest } from "../utils/api"
 
 const ChatPage = () => {
   const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState("")
-  const [imageFile, setImageFile] = useState(null)
   const [charCount, setCharCount] = useState(0)
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const [isFileUploading, setIsFileUploading] = useState(false)
-  const [fileName, setFileName] = useState("my file")
   const [userName, setUserName] = useState("")
   const [likedMessages, setLikedMessages] = useState([])
 
@@ -31,6 +27,7 @@ const ChatPage = () => {
       setIsLoading(false)
     }
   }
+
   const sendMessage = useCallback(
     async (e) => {
       e.preventDefault()
@@ -44,72 +41,26 @@ const ChatPage = () => {
       }
 
       try {
-        const formData = new FormData()
-        formData.append("text", newMessage)
-        formData.append("user", userName)
-        if (imageFile) {
-          formData.append("image", imageFile)
-        }
-    
-        
         const response = await jsonApiRequest("POST", "/messages", {
           text: newMessage,
           user: userName,
         })
-    
+
         if (response.ok) {
           const data = await response.json()
           setMessages([...messages, data])
           setNewMessage("")
-          setImageFile(null)
           setUserName("")
           setCharCount(0)
-          setIsFileUploading(false)
         } else {
           console.error("Failed to send message, Response:", response)
-          setIsFileUploading(false)
         }
       } catch (error) {
         console.error("Error sending message:", error)
-        setIsFileUploading(false)
       }
     },
-    [newMessage, userName, imageFile, messages]
+    [newMessage, userName, messages]
   )
-
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0]
-    if (file) {
-      setImageFile(file)
-      setFileName(file.name)
-      setIsFileUploading(true)
-    }
-  }
-
-  useEffect(() => {
-    if (imageFile) {
-      const uploadFile = async () => {
-        try {
-          const formData = new FormData()
-          formData.append("file", imageFile)
-
-          const response = await apiRequest("POST", "/messages", {}, formData)
-
-          if (response.ok) {
-            setIsFileUploading(false)
-          } else {
-            console.error("Failed to upload file, Response:", response)
-            setIsFileUploading(false)
-          }
-        } catch (error) {
-          console.error("Error uploading file:", error)
-          setIsFileUploading(false)
-        }
-      }
-
-      uploadFile()
-    }
-  }, [imageFile])
 
   const getTimeSinceMessage = (createdAt) => {
     const now = new Date()
@@ -142,10 +93,13 @@ const ChatPage = () => {
         newLikes = -1
       }
 
-      const response = await jsonApiRequest("POST", `/messages/${messageId}/like`, {
-        likes: newLikes
-      })
-  
+      const response = await jsonApiRequest(
+        "POST",
+        `/messages/${messageId}/like`,
+        {
+          likes: newLikes,
+        }
+      )
 
       if (response.ok) {
         const updatedMessages = messages.map((message) => {
@@ -178,94 +132,68 @@ const ChatPage = () => {
     return <p>Loading...</p>
   }
 
-  const renderImage = (image) => {
-    return (
-      <img
-        src={`https://my-art-server.onrender.com/${image}`}
-        alt="Messages img"
-      />
-    )
-  }
-
   return (
     <div className="chat-container">
-      <form className="my-form" onSubmit={sendMessage}>
-        <h3 className="text-label">Your Name</h3>
-        <input
-          type="text"
-          id="newMessageInput"
-          name="userName"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-          placeholder="..."
-          className="input-field"
-        />
-        <h3 className="text-label">Write your message here</h3>
-        <input
-          type="text"
-          id="newMessageInput"
-          name="newMessage"
-          value={newMessage}
-          onChange={(e) => {
-            const inputValue = e.target.value
-            setNewMessage(inputValue)
-            setCharCount(inputValue.length)
-            setError("")
-          }}
-          placeholder="..."
-          className="input-field"
-        />
-        <p className={charCount > 140 ? "char-count exceeded" : "char-count"}>
-          {charCount}/140 characters
-        </p>
-        {error && <p style={{ color: "#FFADAD" }}>{error}</p>}
-        <div className="file-upload-container">
-          <p htmlFor="fileUpload" className="file-upload-label">
-            Choose a file: <span className="file-name">{fileName}</span>
-          </p>
+      <div className="form-desk">
+        <form className="my-form" onSubmit={sendMessage}>
+          <h3 className="text-label">Your Name</h3>
           <input
-            type="file"
-            id="fileUpload"
-            accept="image/*"
-            onChange={handleFileUpload}
-            className="file-upload-input"
+            type="text"
+            id="newMessageInput"
+            name="userName"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+            placeholder="..."
+            className="input-field"
           />
-          {isFileUploading && (
-            <p className="uploading-message">Uploading file...</p>
-          )}
-        </div>
-        <button
-          className="fill-button"
-          type="submit"
-          disabled={isFileUploading}
-        >
-          Send
-        </button>
-      </form>
+          <h3 className="text-label">Write your message here</h3>
+          <input
+            type="text"
+            id="newMessageInput"
+            name="newMessage"
+            value={newMessage}
+            onChange={(e) => {
+              const inputValue = e.target.value
+              setNewMessage(inputValue)
+              setCharCount(inputValue.length)
+              setError("")
+            }}
+            placeholder="..."
+            className="input-field"
+          />
+          <p className={charCount > 140 ? "char-count exceeded" : "char-count"}>
+            {charCount}/140 characters
+          </p>
+          {error && <p style={{ color: "#FFADAD" }}>{error}</p>}
+          <button className="fill-button" type="submit">
+            Send
+          </button>
+        </form>
+      </div>
       <h2 className="title">Chat</h2>
-      <div className="message-list">
-        {messages.map((message) => (
-          <div key={message._id} className="message">
-            <span className="user-name">{message.user}:</span>
-            <span className="message-text">{message.text}</span>
-            {message.image && renderImage(message.image)}
-            <div className="message-footer">
-              <button
-                style={{ backgroundColor: "black", color: "white" }}
-                onClick={() =>
-                  toggleLike(
-                    message._id,
-                    likedMessages.includes(message._id) ? "unlike" : "like"
-                  )
-                }
-              >
-                 {likedMessages.includes(message._id) ? "❤️️" : "♥"}{" "}
-                {message.likes}
-              </button>
-              <small>{getTimeSinceMessage(message.createdAt)}</small>
+      <div className="list-desk">
+        <div className="message-list">
+          {messages.map((message) => (
+            <div key={message._id} className="message">
+              <p className="user-name">{message.user}:</p>
+              <p className="message-text">{message.text}</p>
+              <div className="message-footer">
+                <button
+                  onClick={() =>
+                    toggleLike(
+                      message._id,
+                      likedMessages.includes(message._id) ? "unlike" : "like"
+                    )
+                  }
+                >
+                  {likedMessages.includes(message._id) ? "❤️️" : "♥"}{" "}
+                  {message.likes}
+                </button>
+                <p>{getTimeSinceMessage(message.createdAt)}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )

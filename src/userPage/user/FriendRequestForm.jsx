@@ -1,8 +1,8 @@
 import React, { useState } from "react"
-import axios from "axios"
 import { getUserIdFromToken, isLoggedIn } from "../auth/authUtils"
+import { apiRequest } from "../../utils/api"
 
-axios.defaults.baseURL = "https://my-art-server.onrender.com"
+
 
 const FriendRequestForm = ({ userId, onRequestSent }) => {
   const [loading, setLoading] = useState(false)
@@ -21,19 +21,22 @@ const FriendRequestForm = ({ userId, onRequestSent }) => {
     try {
       const token = localStorage.getItem("token")
       const loggedInUserId = getUserIdFromToken(token)
-      await axios.post(
-        `/friends/send/${userId}`,
-        { senderId: loggedInUserId },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const apiResult = await apiRequest("POST", `/friends/send/${userId}`, {
+        "Authorization": `Bearer ${token}`,
+      }, { senderId: loggedInUserId })
+      if (!apiResult.ok) {
+        const errorMessage = await apiResult.json().then(json => {
+          return json.message
+        }).catch(() => {
+          return "Error sending friend request"
+        })
+        throw new Error(errorMessage)
+      }
+    
       setSuccess("Friend request sent!")
       onRequestSent()
     } catch (error) {
-      const errorMessage = error.response?.data?.message
+      const errorMessage = error.message
       if (errorMessage === "You are already friends.") {
         setError("You are already friends.")
       } else {
@@ -45,7 +48,7 @@ const FriendRequestForm = ({ userId, onRequestSent }) => {
   }
 
   return (
-    <div>
+    <div className="FriendRequestbutton">
       <button
         className="user-button"
         onClick={sendFriendRequest}

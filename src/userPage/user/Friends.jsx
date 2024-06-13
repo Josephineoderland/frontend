@@ -54,6 +54,7 @@ const Friends = () => {
         {friends.length === 0 ? (
           <p>You have not added any friends yet.</p>
         ) : (
+          <div className="friends-container">
           <ul className="friends-list">
             {friends.map((friend, index) => (
               <li key={index} className="friend-item">
@@ -74,6 +75,7 @@ const Friends = () => {
               </li>
             ))}
           </ul>
+          </div>
         )}
       </div>
     </>

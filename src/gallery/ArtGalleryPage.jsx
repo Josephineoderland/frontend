@@ -52,42 +52,44 @@ const ArtGalleryPage = () => {
   }
 
   return (
-    <div className="main-content">
-      <div className="title-art">
-        <div className="under-title">
-          <div className="title-info">
-            <h3>Search for a location!</h3>{" "}
-            <p>
-              Discover the vibrant world of art around your location. Search for
-              art galleries and exhibitions nearby to immerse yourself in
-              creativity and culture. Find out how many art galleries are
-              available in your area and plan your next artistic adventure!
-            </p>
+    <div className="top-container">
+      <div className="main-content">
+        <div className="title-art">
+          <div className="under-title">
+            <div className="title-info">
+              <h3>Search for a location!</h3>{" "}
+              <p>
+                Discover the vibrant world of art around your location. Search
+                for art galleries and exhibitions nearby to immerse yourself in
+                creativity and culture. Find out how many art galleries are
+                available in your area and plan your next artistic adventure!
+              </p>
+            </div>
           </div>
         </div>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            handleSearch()
+          }}
+          className="search-container"
+        >
+          <div className="search-bar">
+            <input
+              type="text"
+              id="newMessageInput"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleKeyPress}
+              placeholder="Enter location..."
+              className="searchTerm"
+            />
+            <button type="submit" className="searchButton">
+              <i className="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
       </div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
-          handleSearch()
-        }}
-        className="search-container"
-      >
-        <div className="search-bar">
-          <input
-            type="text"
-            id="newMessageInput"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyDown={handleKeyPress}
-            placeholder="Enter location..."
-            className="searchTerm"
-          />
-          <button type="submit" className="searchButton">
-            <i className="fas fa-search"></i>
-          </button>
-        </div>
-      </form>
       {!searchQuery && (
         <footer className="app-footer">
           <div className="footer-content">
@@ -110,40 +112,43 @@ const ArtGalleryPage = () => {
               ></i>
             </div>
           )}
-          {artGalleries.length > 0
-            ? artGalleries.map((gallery, index) => (
-                <div key={index} className="gallery-item-container">
-                  <div key={index} className="gallery-item">
-                    <div className="gallery-info">
-                      <h3>{gallery.name}</h3>
-                      <div className="art-description">
-                        <p>Location: {gallery.formatted_address}</p>
-                        <p>
-                          Opening Hours:{" "}
-                          {gallery.opening_hours &&
-                          gallery.opening_hours.open_now
-                            ? "Open Now"
-                            : "Closed"}
-                        </p>
+          <div className="gallery-container">
+            {artGalleries.length > 0
+              ? artGalleries.map((gallery, index) => (
+                  <div key={index} className="gallery-item-container">
+                    <div key={index} className="gallery-item">
+                      <div className="gallery-info">
+                        <h3>{gallery.name}</h3>
+                        <div className="art-description">
+                          <p>Location: {gallery.formatted_address}</p>
+                          <p>
+                            Opening Hours:{" "}
+                            {gallery.opening_hours &&
+                            gallery.opening_hours.open_now
+                              ? "Open Now"
+                              : "Closed"}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="art-container">
+                        {gallery.photos && gallery.photos.length > 0 ? (
+                          <img
+                            className="map-img"
+                            src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${gallery.photos[0].photo_reference}&key=AIzaSyC3bo_j2nNUnH_7w7cDaR2p1WnRvN8-1w4`}
+                            alt="Art Gallery"
+                          />
+                        ) : (
+                          <img src={defaultImage} alt="Default" />
+                        )}
                       </div>
                     </div>
-                    <div className="art-container">
-                      {gallery.photos && gallery.photos.length > 0 ? (
-                        <img
-                          className="map-img"
-                          src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${gallery.photos[0].photo_reference}&key=AIzaSyC3bo_j2nNUnH_7w7cDaR2p1WnRvN8-1w4`}
-                          alt="Art Gallery"
-                        />
-                      ) : (
-                        <img src={defaultImage} alt="Default" />
-                      )}
-                    </div>
                   </div>
-                </div>
-              ))
-            : null}
+                ))
+              : null}
+          </div>
         </div>
       )}
+
       {searchQuery !== "" && !loading && artGalleries.length === 0 && (
         <p>No art galleries found in this location.</p>
       )}

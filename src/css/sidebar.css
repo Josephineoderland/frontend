@@ -1,9 +1,10 @@
 .sidebar {
-  min-height: 100vh;
   background-color: #f9f9f9;
   padding-top: 20px;
   border-right: 1px solid #ccc;
   z-index: 1;
+  width: 60px;
+  /* Ange önskad bredd för sidofältet */
 }
 
 .sidebar ul {
@@ -22,11 +23,22 @@
   color: #333;
 }
 
-.sidebar a i {
-  font-size: 18px;
-}
+
 
 .sidebar a:hover {
   background-color: #e9ecef;
   border-radius: 5px;
+}
+
+
+@media (min-width:760px) and (max-width: 1024px) {
+  .sidebar li {
+    padding: 45px 25px;
+
+  }
+
+  .sidebar a i {
+    font-size: 25px;
+  }
+
 }

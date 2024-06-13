@@ -86,10 +86,12 @@ const Register = ({ onRegister }) => {
 
   return (
     <div className="fill-container">
+
       <div className="fill-in">
         <div className="fill-title">
           <h3>Register Now</h3>
         </div>
+        <div className="log-reg-input">
         <div className="input-container">
           <i className="fas fa-user input-icon user-icon"></i>{" "}
           <input
@@ -109,6 +111,7 @@ const Register = ({ onRegister }) => {
             placeholder="Password"
             disabled={isLoading}
           />
+        </div>
         </div>
         <div className="input-container">
           <i className="fas fa-file-alt input-icon file-icon"></i>

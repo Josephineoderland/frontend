@@ -51,9 +51,7 @@ const PrivChat = () => {
         )
 
         const data = await response.json()
-        console.log("Unread messages data:", data) // Log unread messages data
-
-        // Set unread messages state correctly
+        console.log("Unread messages data:", data) 
         if (data.unreadCounts) {
           setUnreadMessages(data.unreadCounts)
         } else {
@@ -102,7 +100,7 @@ const PrivChat = () => {
   return (
     <>
       <div className="title-container">
-        <h2>Chat With Friends</h2>
+        <h2>Chat</h2>
       </div>
       <div className="container-page">
         <ul className="friends-list">

@@ -4,6 +4,7 @@
 
 .fill-title h3 {
   color: black;
+  margin-bottom: 20px;
 }
 
 .fill-in {
@@ -12,7 +13,6 @@
   padding: 30px;
   margin: 20px;
   width: 400px;
-
   box-sizing: border-box;
 }
 
@@ -22,12 +22,13 @@
   align-items: center;
   padding: 20px;
   box-sizing: border-box;
+
 }
 
 .input-container {
   display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+  align-items: flex-start;
+  margin-bottom: 10px;
 }
 
 .input-icon {
@@ -58,23 +59,6 @@ input[type="password"]:active {
 
 }
 
-.fill-button {
-  width: 100%;
-  padding: 10px 20px;
-  background-color: #000000;
-  color: #fff;
-  text-decoration: none;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  font-family: "Bodoni Moda", serif;
-}
-
-.fill-button:disabled {
-  background-color: gray;
-  cursor: not-allowed;
-}
-
 .custom-file-input input[type="file"] {
   border: none;
   border-bottom: 2px solid black;
@@ -85,4 +69,87 @@ input[type="password"]:active {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+
+@media (min-width:760px) and (max-width: 1024px) {
+  .input-icon {
+    width: 34px;
+    height: 34px;
+    margin: 10px 10px 10px 0;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 15px 0;
+    font-size: 20px;
+  }
+
+  .input-container {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+  }
+
+  .fill-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    box-sizing: border-box;
+    margin: 60px 100px;
+  }
+
+}
+
+@media (min-width: 1025px) {
+  .input-icon {
+    width: 34px;
+    height: 34px;
+    margin: 10px 10px 10px 0;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 15px 0;
+    font-size: 20px;
+  }
+
+  .input-container {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+  }
+
+  .fill-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    box-sizing: border-box;
+    margin: 10px 100px;
+  }
+
+  .fill-in {
+    width: 600px;
+  }
+
+  .log-reg-input {
+   
+  }
+
+  .fill-title  {
+   text-align: center;
+  }
+
+  .fill-img{
+  display: flex;
+  justify-content: center;
+  }
+
+
+  .fill-img img{
+width: 60%;
+    }
 }

@@ -1,6 +1,7 @@
-
 .results-container {
   margin-top: 20px;
+  height: calc(100vh - 340px);
+  overflow: auto;
 }
 
 .results-list {
@@ -25,4 +26,17 @@
 
 .result-item a:hover {
   text-decoration: underline;
+}
+
+@media (min-width:760px) and (max-width: 1024px) {
+  .results-list li {
+    font-size: 20px;
+  }
+
+}
+
+@media (min-width: 1025px) {
+  .results-list li {
+    font-size: 20px;
+  }
 }

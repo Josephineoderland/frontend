@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import "../css/RecentMessages.css"
 import { jsonApiRequest } from "../utils/api"
 
 const RecentMessages = () => {
@@ -38,6 +37,9 @@ const RecentMessages = () => {
 
   return (
     <div className="recent-messages-container">
+      <div className="recent-msg-tablet">
+        <h3 style={{color: "white"}}> Recent Messages! </h3>
+      </div>
       {recentMessages.map((message) => (
         <div
           key={message._id}

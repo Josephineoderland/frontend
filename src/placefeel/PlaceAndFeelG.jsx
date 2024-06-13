@@ -21,7 +21,7 @@ const PlaceAndFeelG = () => {
       })
       .catch((error) => console.error("Error fetching feelings:", error))
 
-      // fetch("https://my-art-server.onrender.com/api/placeFeel/places")
+    // fetch("https://my-art-server.onrender.com/api/placeFeel/places")
     jsonApiRequest("GET", "/api/placeFeel/places")
       .then((response) => response.json())
       .then((data) => {
@@ -37,19 +37,23 @@ const PlaceAndFeelG = () => {
   }
 
   return (
-    <div className="Random">
-      <div className="feeling-section">
-        <h2>Random Feeling:</h2>
-        {showContent && <p>{feeling}</p>}
-      </div>
-      <div className="place-section">
-        <h2>Random Place:</h2>
-        {showContent && <p>{place}</p>}
-      </div>
-      <div className="character-btn">
-        <button className="generate-btn" onClick={generateRandom}>
-          Generate Place And Feeling
-        </button>
+    <div className="character-page">
+      <div className="generate-container">
+        <div className="Random">
+          <div className="content-section">
+            <h3>Random Feeling:</h3>
+            {showContent && <p>{feeling}</p>}
+          </div>
+          <div className="content-section">
+            <h3>Random Place:</h3>
+            {showContent && <p>{place}</p>}
+          </div>
+          <div className="character-btn">
+            <button className="generate-btn" onClick={generateRandom}>
+              Generate Place And Feeling
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   )

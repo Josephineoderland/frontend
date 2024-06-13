@@ -94,6 +94,7 @@ const Navbar = ({ isLoggedIn, updateIsLoggedIn }) => {
             </motion.div>
           )}
         </AnimatePresence>
+
         <AnimatePresence>
           {isToggled && (
             <motion.div
