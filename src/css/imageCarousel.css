@@ -11,9 +11,7 @@
 
 .img {
   position: absolute;
-
   filter: drop-shadow(10px 10px 10px rgba(41, 41, 41, 0.5));
-
 }
 
 .carousel-text {
@@ -28,8 +26,6 @@
 
 @media (min-width: 1025px) {
   .img-container {
-    height: 600px;
-   
-
+    height: 700px;
   }
 }

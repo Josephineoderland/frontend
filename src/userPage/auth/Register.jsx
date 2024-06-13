@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { getUserIdFromToken } from "../auth/authUtils"
 import "../../css/log-reg.css"
 import fillImg from "../../assets/Namnlöst-8.png"
-import { apiRequest } from "../../utils/api" // Importera din API-funktion
+import { apiRequest } from "../../utils/api"
 
 const Register = ({ onRegister }) => {
   const [username, setUsername] = useState("")
@@ -25,14 +25,7 @@ const Register = ({ onRegister }) => {
     }
 
     try {
-      const response = await apiRequest(
-        "POST",
-        "auth/register",
-        {
-          // Multer hanterar Content-Type för multipart/form-data automatiskt.
-        },
-        formData
-      )
+      const response = await apiRequest("POST", "auth/register", {}, formData)
 
       if (response.status !== 201) {
         const responseData = await response.json()
@@ -72,12 +65,10 @@ const Register = ({ onRegister }) => {
   }
 
   const shortenFileName = (name, maxLength = 20) => {
-    // Kontrollera om namnet är kortare än maxLength
     if (name.length <= maxLength) {
       return name
     }
 
-    // Dela namnet vid första slashen och ta de första delarna
     const parts = name.split("/")
     const shortenedName = `${parts[0].substring(0, maxLength - 3)}...`
 
@@ -86,32 +77,31 @@ const Register = ({ onRegister }) => {
 
   return (
     <div className="fill-container">
-
       <div className="fill-in">
         <div className="fill-title">
           <h3>Register Now</h3>
         </div>
         <div className="log-reg-input">
-        <div className="input-container">
-          <i className="fas fa-user input-icon user-icon"></i>{" "}
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username"
-            disabled={isLoading}
-          />
-        </div>
-        <div className="input-container">
-          <i className="fas fa-lock input-icon password-icon"></i>{" "}
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            disabled={isLoading}
-          />
-        </div>
+          <div className="input-container">
+            <i className="fas fa-user input-icon user-icon"></i>{" "}
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username"
+              disabled={isLoading}
+            />
+          </div>
+          <div className="input-container">
+            <i className="fas fa-lock input-icon password-icon"></i>{" "}
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              disabled={isLoading}
+            />
+          </div>
         </div>
         <div className="input-container">
           <i className="fas fa-file-alt input-icon file-icon"></i>

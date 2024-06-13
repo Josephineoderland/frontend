@@ -10,10 +10,6 @@
   margin-bottom: 20px;
 }
 
-.user-info h3 {
-  color: black;
-}
-
 .user-info a {
   color: rgb(0, 0, 0);
 }
@@ -33,5 +29,3 @@
     margin-left: 30px;
   }
 }
-
-@media (min-width: 1025px) {}

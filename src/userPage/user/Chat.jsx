@@ -51,7 +51,7 @@ const PrivChat = () => {
         )
 
         const data = await response.json()
-        console.log("Unread messages data:", data) 
+        console.log("Unread messages data:", data)
         if (data.unreadCounts) {
           setUnreadMessages(data.unreadCounts)
         } else {

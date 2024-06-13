@@ -21,7 +21,6 @@
 .private-msg li {
   margin: 10px 0;
   display: flex;
-
   width: 100%;
 }
 
@@ -39,7 +38,7 @@ li.right {
 }
 
 li.right .message-priv {
-  background-color: #6cb0e8;
+  background-color: #0762ad;
   color: #ffffff;
 }
 
@@ -69,7 +68,6 @@ li.right .message-priv {
     height: calc(100% - 150px); 
   }
 }
-
 
 @media (min-width: 1025px) {
   .private-chat-container {

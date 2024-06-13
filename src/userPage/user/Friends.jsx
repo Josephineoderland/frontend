@@ -40,7 +40,6 @@ const Friends = () => {
 
     fetchFriends()
   }, [])
-  
 
   if (loading) return <div>Loading...</div>
   if (error) return <div>{error}</div>
@@ -55,26 +54,26 @@ const Friends = () => {
           <p>You have not added any friends yet.</p>
         ) : (
           <div className="friends-container">
-          <ul className="friends-list">
-            {friends.map((friend, index) => (
-              <li key={index} className="friend-item">
-                {friend.profileImageUrl && (
-                  <img
-                    src={`${process.env.REACT_APP_API_HOST}${friend.profileImageUrl}`}
-                    alt={`${friend.username}'s profile`}
-                    className="friend-profile-image"
-                  />
-                )}
-                <p className="friend-name">{friend.username}</p>
-                <button
-                  className="user-button"
-                  onClick={() => navigate(`/userPage/${friend._id}`)}
-                >
-                  Friend's Page
-                </button>
-              </li>
-            ))}
-          </ul>
+            <ul className="friends-list">
+              {friends.map((friend, index) => (
+                <li key={index} className="friend-item">
+                  {friend.profileImageUrl && (
+                    <img
+                      src={`${process.env.REACT_APP_API_HOST}${friend.profileImageUrl}`}
+                      alt={`${friend.username}'s profile`}
+                      className="friend-profile-image"
+                    />
+                  )}
+                  <p className="friend-name">{friend.username}</p>
+                  <button
+                    className="user-button"
+                    onClick={() => navigate(`/userPage/${friend._id}`)}
+                  >
+                    Friend's Page
+                  </button>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
       </div>

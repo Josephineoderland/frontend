@@ -30,7 +30,7 @@
   align-items: center;
 }
 
-.container,
+.container
 h3 {
   margin: 10px 0 0;
 }
@@ -98,8 +98,6 @@ p {
   .character-page p {
     line-height: 1.6;
   }
-
-
 }
 
 @media (min-width: 1025px) {
@@ -129,7 +127,6 @@ p {
   .page-img img {
     width: 100%;
     height: 100%;
-    /* Återställ till auto för att anpassa till innehållet */
   }
 
   .container {
@@ -143,7 +140,6 @@ p {
     display: block;
     margin-left: 20px;
     flex-grow: 1;
-    /* Tillåter.desktop-container att växa och fylla utrymmet */
   }
 
   .desktop-container h3 {
@@ -152,11 +148,8 @@ p {
 
   .desktop-container img {
     height: 100%;
-    /* Fast höjd */
     width: auto;
-    /* Anpassar bredden automatiskt */
     object-fit: cover;
-    /* Ser till att bilden täcker hela området utan att sträcka sig */
   }
 
   .draw-info-child {
@@ -169,7 +162,6 @@ p {
   .mobtab-container {
     display: none;
   }
-
 
   .generate-btn {
     padding: 15px 30px;

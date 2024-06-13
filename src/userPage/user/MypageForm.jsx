@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { apiRequest } from "../../utils/api" // Importera din apiRequest-funktion
+import { apiRequest } from "../../utils/api"
 
 const MyPageForm = ({ token }) => {
   const [text, setText] = useState("")
@@ -33,7 +33,6 @@ const MyPageForm = ({ token }) => {
       setImage(null)
       setFileName("No file chosen")
       setIsFileUploading(false)
-      // Reload posts after successful post creation
       window.location.reload()
     } catch (error) {
       console.error("Error creating post:", error)

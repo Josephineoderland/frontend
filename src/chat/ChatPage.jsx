@@ -109,7 +109,6 @@ const ChatPage = () => {
           return message
         })
 
-        // Uppdatera likedMessages baserat på åtgärden
         if (actionType === "like" && !likedMessages.includes(messageId)) {
           setLikedMessages([...likedMessages, messageId])
         } else if (

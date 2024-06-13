@@ -4,7 +4,6 @@
   align-items: stretch;
 }
 
-/*intro*/
 .title-art {
   background-color: #ccc;
   padding: 20px;
@@ -22,21 +21,16 @@
   border: solid 2px black;
 }
 
-/*formen för sök*/
-
 .searchTerm:focus {
   color: #000000;
 }
 
-/*knappen för sök*/
 .searchButton {
   border: none;
   background-color: transparent;
   cursor: pointer;
-
 }
 
-/*icon sök*/
 .searchButton i {
   font-size: 18px;
   color: #333;
@@ -168,6 +162,4 @@
     height: 500px;
 
   }
-
-
 }

@@ -34,8 +34,6 @@
 }
 
 .message {
-  display: flex;
-  flex-direction: column;
   padding: 10px;
   border: 1px solid #000000;
   margin-bottom: 1rem;
@@ -57,7 +55,7 @@ form:hover {
 }
 
 .char-count {
-  color: #9d9c9c;
+  color: #484848;
 }
 
 .char-count.exceeded {
@@ -84,7 +82,6 @@ form:hover {
 }
 
 @media (min-width: 760px) and (max-width: 1024px) {
-
   .form-desk {
     display: flex;
     justify-content: center;
@@ -118,14 +115,12 @@ form:hover {
   }
 
   .message {
-    display: flex;
     padding: 10px;
     width: 70%;
   }
 
   .chat-container {
     background-image: url("../assets/chat3.png");
-
   }
 }
 
@@ -144,7 +139,6 @@ form:hover {
   }
 
   .message {
-    display: flex;
     width: 500px;
   }
 
@@ -152,5 +146,4 @@ form:hover {
     background-image: url("../assets/chat3.png");
     background-position: top;
   }
-
 }

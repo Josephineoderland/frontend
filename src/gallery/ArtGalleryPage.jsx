@@ -84,7 +84,11 @@ const ArtGalleryPage = () => {
               placeholder="Enter location..."
               className="searchTerm"
             />
-            <button type="submit" className="searchButton">
+            <button
+              type="submit"
+              aria-label="search button art gallery"
+              className="searchButton"
+            >
               <i className="fas fa-search"></i>
             </button>
           </div>

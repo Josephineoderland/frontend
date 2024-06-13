@@ -12,7 +12,6 @@ const PlaceAndFeelG = () => {
   }, [])
 
   const fetchData = () => {
-    // fetch("https://my-art-server.onrender.com/api/placeFeel/feelings")
     jsonApiRequest("GET", "/api/placeFeel/feelings")
       .then((response) => response.json())
       .then((data) => {
@@ -21,7 +20,6 @@ const PlaceAndFeelG = () => {
       })
       .catch((error) => console.error("Error fetching feelings:", error))
 
-    // fetch("https://my-art-server.onrender.com/api/placeFeel/places")
     jsonApiRequest("GET", "/api/placeFeel/places")
       .then((response) => response.json())
       .then((data) => {

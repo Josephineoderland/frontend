@@ -126,19 +126,24 @@ const MyPage = () => {
                       userId={userId}
                       token={token}
                       isEditable={true}
-                      onPopupToggle={(isOpen) => setIsPopupOpen(isOpen)} // Callback-funktion
+                      onPopupToggle={(isOpen) => setIsPopupOpen(isOpen)}
                     />
                   </div>
                 )}
 
-                {!isPopupOpen && ( // Visa innehåll endast när popup-formuläret är stängt
+                {!isPopupOpen && (
                   <>
                     <div className="combined-container">
                       {" "}
-                      {/* Nya gemensamma div för form och info */}
                       {hasUserSettings && (
                         <div className="desk-my-container">
-                          <div className="user-info-container">
+                          <div
+                            className="user-info-container"
+                            style={{
+                              backgroundColor:
+                                userSettings.backgroundColor || "#ffffff",
+                            }}
+                          >
                             <div className="user-info">
                               <h3>About Me</h3>
                               <p>
@@ -176,7 +181,6 @@ const MyPage = () => {
                       )}
                       <MyPageForm userId={userId} token={token} />
                     </div>{" "}
-                    {/* Slutar gemensamma div för form och info */}
                     <div className="posts">
                       {posts.map((post) => (
                         <div key={post._id} className="post">
@@ -198,7 +202,7 @@ const MyPage = () => {
               </div>
             </>
           )}
-          <Outlet /> {/* Dynamically renders child routes */}
+          <Outlet />
         </div>
       </main>
     </div>

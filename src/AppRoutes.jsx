@@ -13,7 +13,6 @@ import Login from "./userPage/auth/Login"
 import Register from "./userPage/auth/Register"
 import MyPage from "./userPage/user/MyPage"
 import Friends from "./userPage/user/Friends"
-import LikedPosts from "./userPage/user/LikedPosts"
 import PrivateChat from "./userPage/user/PrivateChat"
 import FriendRequests from "./userPage/user/FriendRequests"
 import UserPage from "./userPage/user/UserPage"
@@ -43,10 +42,9 @@ const AppRoutes = ({ onLogin, onRegister }) => {
       >
         <Route path="friends" element={<Friends />} />
         <Route path="chat" element={<Chat />} />
-        <Route path="liked-posts" element={<LikedPosts />} />
         <Route path="private-chat/:friendId" element={<PrivateChat />} />
         <Route path="friend-requests" element={<FriendRequests />} />
-        <Route path="search-component" element={<SearchComponent/>} />
+        <Route path="search-component" element={<SearchComponent />} />
       </Route>
       <Route path="/UserPage/:userId" element={<UserPage />} />
     </Routes>

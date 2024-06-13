@@ -2,8 +2,6 @@ import React, { useState } from "react"
 import { getUserIdFromToken, isLoggedIn } from "../auth/authUtils"
 import { apiRequest } from "../../utils/api"
 
-
-
 const FriendRequestForm = ({ userId, onRequestSent }) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
@@ -21,18 +19,26 @@ const FriendRequestForm = ({ userId, onRequestSent }) => {
     try {
       const token = localStorage.getItem("token")
       const loggedInUserId = getUserIdFromToken(token)
-      const apiResult = await apiRequest("POST", `/friends/send/${userId}`, {
-        "Authorization": `Bearer ${token}`,
-      }, { senderId: loggedInUserId })
+      const apiResult = await apiRequest(
+        "POST",
+        `/friends/send/${userId}`,
+        {
+          Authorization: `Bearer ${token}`,
+        },
+        { senderId: loggedInUserId }
+      )
       if (!apiResult.ok) {
-        const errorMessage = await apiResult.json().then(json => {
-          return json.message
-        }).catch(() => {
-          return "Error sending friend request"
-        })
+        const errorMessage = await apiResult
+          .json()
+          .then((json) => {
+            return json.message
+          })
+          .catch(() => {
+            return "Error sending friend request"
+          })
         throw new Error(errorMessage)
       }
-    
+
       setSuccess("Friend request sent!")
       onRequestSent()
     } catch (error) {

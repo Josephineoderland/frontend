@@ -39,11 +39,11 @@ const Sidebar = () => {
       <ul>
         <li>
           <Link to="/my-page">
-            <i className="far fa-user"></i>
+            <i className="far fa-user" aria-label="user page"></i>
           </Link>
         </li>
         <li>
-          <Link to="/my-page/friends">
+          <Link to="/my-page/friends" aria-label="your friends">
             <i className="fas fa-users"></i>
           </Link>
         </li>
@@ -56,12 +56,12 @@ const Sidebar = () => {
           </span>
         </li>
         <li>
-          <Link to="/my-page/search-component">
+          <Link to="/my-page/search-component" aria-label="search for users">
             <i className="fas fa-search"></i>
           </Link>
         </li>
         <li>
-          <Link to="/my-page/friend-requests">
+          <Link to="/my-page/friend-requests" aria-label="friend requests">
             <i className="fas fa-exchange-alt"></i>
           </Link>
         </li>

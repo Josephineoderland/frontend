@@ -7,7 +7,7 @@ const SearchComponent = () => {
   const [searchTerm, setSearchTerm] = useState("")
   const [searchResult, setSearchResult] = useState([])
   const [showResults, setShowResults] = useState(true)
-  const [errorMessage, setErrorMessage] = useState("") // State variable for error message
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleSearch = async () => {
     try {
@@ -22,15 +22,15 @@ const SearchComponent = () => {
       if (data.length > 0) {
         setSearchResult(data)
         setShowResults(true)
-        setErrorMessage("") // Clear any previous error message
+        setErrorMessage("")
       } else {
         setSearchResult([])
         setShowResults(false)
-        setErrorMessage("User not found") // Set error message if no users found
+        setErrorMessage("User not found")
       }
     } catch (error) {
       console.error("Error searching users:", error)
-      setErrorMessage("An error occurred while searching users") // Set error message on catch
+      setErrorMessage("An error occurred while searching users")
     }
   }
 

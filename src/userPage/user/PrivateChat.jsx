@@ -45,7 +45,7 @@ const PrivateChat = () => {
     const formattedMessage = {
       ...message,
       isSenderLeft,
-      timestamp: new Date(message.timestamp || Date.now()), // Added timestamp
+      timestamp: new Date(message.timestamp || Date.now()),
     }
     console.log(formattedMessage.timestamp)
 

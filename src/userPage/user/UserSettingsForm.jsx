@@ -7,12 +7,26 @@ const UserSettingsForm = ({
   isEditable = true,
   onPopupToggle,
 }) => {
+  const pastelColors = [
+    "#ffb3ba",
+    "#ffdfba",
+    "#ffffba",
+    "#baffc9",
+    "#bae1ff",
+    "#ffd4e5",
+    "#ffe9ae",
+    "#dbdcff",
+    "#eecbff",
+    "#FFFFFC",
+  ]
+
   const [settings, setSettings] = useState({
     email: "",
     instagram: "",
     age: "",
     occupation: "",
     description: "",
+    backgroundColor: "#ffffff",
   })
 
   useEffect(() => {
@@ -29,6 +43,7 @@ const UserSettingsForm = ({
             age: "",
             occupation: "",
             description: "",
+            backgroundColor: "#ffffff",
           }
         )
       } catch (error) {
@@ -56,15 +71,21 @@ const UserSettingsForm = ({
       )
       const data = await response.json()
       setSettings(data)
-      onPopupToggle(false) // Meddela att popup-formuläret är stängt
+      onPopupToggle(false)
     } catch (error) {
       console.error("Error updating settings:", error)
     }
   }
 
   return (
-    <div className="my-form">
-      <form onSubmit={handleSubmit}>
+    <div
+      className="my-form"
+      style={{ backgroundColor: settings.backgroundColor }}
+    >
+      <form
+        style={{ backgroundColor: settings.backgroundColor }}
+        onSubmit={handleSubmit}
+      >
         <div className="form-group">
           <i className="fas fa-envelope"></i>
           <input
@@ -122,6 +143,39 @@ const UserSettingsForm = ({
             onChange={handleChange}
             placeholder="About Me"
           ></textarea>
+        </div>
+
+
+        <div className="form-group mobile">
+          <label htmlFor="backgroundColor">Background Color:</label>
+          <div
+            className="color-picker mobil"
+            style={{ display: "flex", flexDirection: "row" }}
+          >
+            {pastelColors.map((color) => (
+              <div
+                key={color}
+                className="color-option"
+                style={{
+                  backgroundColor: color,
+
+                  width: "10px",
+                  height: "10px",
+                  margin: "0px 5px",
+                  cursor: "pointer",
+                  border:
+                    settings.backgroundColor === color
+                      ? "2px solid black"
+                      : "2px solid transparent",
+                }}
+                onClick={() =>
+                  handleChange({
+                    target: { name: "backgroundColor", value: color },
+                  })
+                }
+              ></div>
+            ))}
+          </div>
         </div>
 
         <button

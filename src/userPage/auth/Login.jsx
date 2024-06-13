@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { getUserIdFromToken } from "./authUtils"
 import "../../css/log-reg.css"
-import userIcon from "../../assets/user_1251070.png"
-import passwordIcon from "../../assets/lock_12484073.png"
 import fillImg from "../../assets/Namnlöst-8.png"
 import { jsonApiRequest } from "../../utils/api"
 
@@ -23,16 +21,6 @@ const Login = ({ onLogin }) => {
         username,
         password,
       })
-      // const response = await fetch(
-      //   "https://my-art-server.onrender.com/auth/login",
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify({ username, password }),
-      //   }
-      // )
 
       if (!response.ok) {
         const errorData = await response.json()
@@ -76,11 +64,7 @@ const Login = ({ onLogin }) => {
           <h3>Login</h3>
         </div>
         <div className="input-container">
-          <img
-            src={userIcon}
-            alt="User Icon"
-            className="input-icon user-icon"
-          />
+          <i className="fas fa-user input-icon user-icon"></i>{" "}
           <input
             type="text"
             value={username}
@@ -90,11 +74,7 @@ const Login = ({ onLogin }) => {
           />
         </div>
         <div className="input-container">
-          <img
-            src={passwordIcon}
-            alt="Password Icon"
-            className="input-icon password-icon"
-          />
+          <i className="fas fa-lock input-icon password-icon"></i>{" "}
           <input
             type="password"
             value={password}

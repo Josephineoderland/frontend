@@ -48,10 +48,18 @@ const Navbar = ({ isLoggedIn, updateIsLoggedIn }) => {
             </h1>
           </div>
           <div className="navbar-button">
-            <button className="btn" onClick={toggleMenu}>
+            <button
+              className="btn"
+              onClick={toggleMenu}
+              aria-label="Öppna menyn"
+            >
               <i className="fas fa-bars"></i>
             </button>
-            <button className="user-icon-btn" onClick={toggleUserMenu}>
+            <button
+              className="user-icon-btn"
+              onClick={toggleUserMenu}
+              aria-label="Visa användarmeny"
+            >
               <i className="far fa-user"></i>
             </button>
           </div>

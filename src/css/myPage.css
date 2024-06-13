@@ -20,6 +20,15 @@
   font-size: 18px;
 }
 
+.form-group.mobile {
+  display: flex;
+  flex-direction: column;
+}
+
+.color-picker.mobil {
+  padding-top: 10px;
+}
+
 .form-group i {
   margin-right: 10px;
 }
@@ -27,7 +36,6 @@
 .title-container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin: 10px;
   padding: 10px;
 }
@@ -35,6 +43,7 @@
 .title-left {
   display: flex;
   align-items: center;
+  margin-right: 30px;
 }
 
 .gear-container {
@@ -157,9 +166,7 @@
 
 @media (min-width: 1025px) {
   .content-wrapper {
-
     margin: 60px 100px;
-
   }
 
   .my-page-container {
